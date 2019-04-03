@@ -1,0 +1,290 @@
+##################################
+# global function
+global !p
+import os
+import string
+def package():
+	filepath = os.path.dirname(path)
+	try:
+		i = 1
+		pathbase = 'src' + os.sep + 'main' + os.sep + 'java' + os.sep + ''
+		index = filepath.index(pathbase)
+		length = len(pathbase)
+	except ValueError as e:
+		i = 3
+		pathbase = 'src' + os.sep + 'test' + os.sep + 'java' + os.sep + ''
+		index = filepath.index(pathbase)
+		length = len(pathbase)
+	package = filepath[index+length:].replace(os.sep, '.')
+	return package
+endglobal
+
+##################################
+# normal snip
+snippet while
+while (${1:condition}) {
+	${2://code...}
+}
+endsnippet
+
+snippet if
+if (${1:condition}) {
+	${2://code...}
+}
+endsnippet
+
+snippet foreach
+for (${1:Object} ${2:obj} : ${3:objs}) {
+	${4:// code...}
+}
+endsnippet
+
+snippet for
+for (${1:int i = 0}; ${2:i < 100} : ${3:i++}) {
+	${4:// code...}
+}
+endsnippet
+
+snippet syso "System.out.println" b
+System.out.println(${1:thing});
+endsnippet
+
+##################################
+# class
+snippet class "normar class" b
+package `!p snip.rv = package()`;
+
+public class `!v expand('%:t:r')` {
+
+	${1:// code}
+
+}
+endsnippet
+
+# main
+snippet main "main function" b
+
+public static void main() {
+
+	${1:// code}
+
+}
+endsnippet
+
+snippet testboot "spring boot test" b
+package `!p snip.rv = package()`;
+
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class `!v expand('%:t:r')` {
+
+	${1:// code}
+
+}
+endsnippet
+
+snippet interface "normar class" b
+package `!p snip.rv = package()`;
+
+public interface `!v expand('%:t:r')` {
+
+	${1:// code}
+
+}
+endsnippet
+
+snippet controller "controller" b
+package `!p snip.rv = package()`;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Api("${1:name}")
+@Controller
+@RequestMapping("${2:url}")
+public class `!v expand('%:t:r')` {
+
+	${3:// code}
+
+}
+endsnippet
+
+snippet service "service" b
+package `!p snip.rv = package()`;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class `!v expand('%:t:r')` {
+
+	${2:// code}
+
+}
+endsnippet
+
+snippet entity "entity" b
+package `!p snip.rv = package()`;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "${1:name}")
+public class `!v expand('%:t:r')` {
+
+	${2:// code}
+
+}
+endsnippet
+
+snippet repository "jpa repository" b
+package `!p snip.rv = package()`;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface `!p snip.rv = fn.replace(".java","")` extends JpaRepository<`!p snip.rv = fn.replace("Repository.java", "")`, ${1:T}> {
+
+}
+endsnippet
+
+################################
+# method
+snippet test "inset @Test method" b
+@Test
+public void test${1:Something}() {
+	${2:// code}
+}
+endsnippet
+
+##########################
+# spring mvc
+snippet au "autowired" b
+@Autowired
+private ${1:Type} ${2:attr};
+endsnippet
+
+snippet co "column" b
+@Column(name = "${1:name}")
+private ${2:Type} ${3:attr};
+endsnippet
+
+snippet rm "requestmapping" b
+@RequestMapping("${1:url}")
+endsnippet
+
+snippet gm "getmapping" b
+@GetMapping("${1:url}")
+endsnippet
+
+snippet pm "putmapping" b
+@PutMapping("${1:url}")
+endsnippet
+
+snippet pm "putmapping" b
+@PutMapping("${1:url}")
+endsnippet
+
+snippet dm "deletemapping" b
+@DeleteMapping("${1:url}")
+endsnippet
+
+snippet ao "ApiOperation" b
+@ApiOperation("${1:name}")
+endsnippet
+
+snippet api "Api" b
+@Api("${1:name}")
+endsnippet
+
+snippet rq "request param" w
+@RequestParam
+endsnippet
+
+snippet rb "response body" b
+@ResponseBody
+endsnippet
+
+snippet ap "api param" w
+@ApiParam(name = "${1:name}", value = "${2:value}", required = ${3:true})
+endsnippet
+
+snippet pv "path variable" w
+@PathVariable
+endsnippet
+
+snippet webmethod "web method" b
+@ApiOperation("${1:name}")
+@${2:method}Mapping("${3:url}")${4}
+public ${5:String} ${6:method}(${7:param}) {
+	${8:// code}
+}
+endsnippet
+
+#######################
+# log
+snippet lg "logger" b
+private static final Logger logger = LoggerFactory.getLogger(`!v expand('%:t:r')`.class);
+endsnippet
+
+snippet ld "logger.debug()" b
+logger.debug("${1:msg}");
+endsnippet
+
+snippet li "logger.info()" b
+logger.info("${1:msg}");
+endsnippet
+
+snippet lw "logger.warn()" b
+logger.warn("${1:msg}");
+endsnippet
+
+snippet le "logger.error()" b
+logger.error("${1:msg}");
+endsnippet
+
+#######################
+# Getters/Setters
+snippet get "getter"
+public ${1:void} get${2:VarName}() {
+	return this.${2/\w+\s*/\l$0/};
+}
+endsnippet
+
+snippet set "setter"
+public void set${2:VarName}(${3:Type} ${4:value}) {
+	this.${2/\w+\s*/\l$0/} = $4;
+}
+endsnippet
+
+snippet getset "getter & setter"
+public ${1:void} get${2:VarName}() {
+	return this.${2/\w+\s*/\l$0/};
+}
+public void set$2($1 ${2/\w+\s*/\l$0/}) {
+	this.${2/\w+\s*/\l$0/} = ${2/\w+\s*/\l$0/};
+}
+endsnippet
+
+#######################
+# method
+snippet method "method" b
+${1:private} ${2:void} ${3:method}($4) {
+	${0:// code}
+}
+endsnippet
+
+#######################
+# try catch
+snippet try "try/catch" b
+try {
+	$1${VISUAL}
+} catch(${2:Exception} ${3:e}){
+	${4:e.printStackTrace();}
+}
+endsnippet

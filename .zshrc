@@ -65,6 +65,9 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  # web-search
+  # vi-mode
+  # tmux
   git
   zsh-syntax-highlighting
   jsontools
@@ -114,10 +117,23 @@ autoload -U compinit && compinit -u
 COMPLETION_WAITING_DOTS="true"
 
 # shell开始vi模式
-set -o vi
+# set -o vi
+# zsh Vi mode
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+export KEYTIMEOUT=1
+
 
 # operation
 alias cls="clear"
+alias copy="clipcopy"
 
 # proxy
 alias g="http_proxy=http://localhost:8123"
@@ -133,6 +149,9 @@ alias ee="trans :en -p"
 alias t="trans :zh -I"
 alias tt="trans :zh -sp -I"
 
+# git
+alias gsc="git svn dcommit --interactive"
+
 # cscope
 export CSCOPE_DB=/home/limeng/.cscope/cscope_db
 
@@ -144,3 +163,6 @@ export EDITOR=/usr/bin/vim
 
 # go
 export PATH=$PATH:/usr/local/go/bin
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

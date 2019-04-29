@@ -1,0 +1,47 @@
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmode
+set number
+set relativenumber
+set scrolloff=3
+set history=100000
+
+set surround
+set multiple-cursors
+
+" clear the highlighted search result
+nnoremap <Space>sc :nohlsearch<CR>
+
+" nnoremap <Space>w :w<CR>
+
+" Quit normal mode
+nnoremap <Space>q  :q<CR>
+nnoremap <Space>Q  :qa!<CR>
+
+" nnoremap H ^
+" nnoremap L $
+
+" Window operation
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+nnoremap <Space>sp <C-W>s
+nnoremap <Space>vs <C-W>v
+
+" Tab operation
+nnoremap tn gt
+nnoremap tp gT
+
+" built in search looks better
+nnoremap <Space>/ /
+" but preserve ideavim search
+nnoremap / :action Find<CR>
+
+nnoremap <Space>gc :action GotoClass<CR>
+nnoremap <Space>ga :action GotoAction<CR>
+
+nnoremap <Space>fp :action ShowFilePath<CR>
+nnoremap <Space>pm :action ShowPopupMenu<CR>

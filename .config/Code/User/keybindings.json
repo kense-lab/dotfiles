@@ -1,0 +1,11 @@
+// 将密钥绑定放在此文件中以覆盖默认值
+[
+  {
+    "key": "shift+alt+r",
+    "command": "workbench.action.tasks.runTask"
+  },
+  {
+    "key": "shift+alt+t",
+    "command": "workbench.action.tasks.terminate"
+  }
+]

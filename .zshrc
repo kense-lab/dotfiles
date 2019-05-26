@@ -68,6 +68,7 @@ plugins=(
   # web-search
   # vi-mode
   # tmux
+  # history
   git
   zsh-syntax-highlighting
   jsontools
@@ -111,14 +112,12 @@ export DEFAULT_USER="limeng"
 
 # autojump
 [[ -s /home/limeng/.autojump/etc/profile.d/autojump.sh ]] && source /home/limeng/.autojump/etc/profile.d/autojump.sh
-autoload -U compinit && compinit -u
+# autoload -U compinit && compinit -u
 
 # 在命令执行的过程中，使用小红点进行提示
 COMPLETION_WAITING_DOTS="true"
 
-# shell开始vi模式
-# set -o vi
-# zsh Vi mode
+# zsh vi mode
 bindkey -v
 
 bindkey '^P' up-history
@@ -128,18 +127,36 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 
+function zle-line-init zle-keymap-select {
+	VIM_PROMPT="%{$fg_bold[yellow]%} -- % NORMAL --% %{$reset_color%}"
+	RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
 export KEYTIMEOUT=1
 
+# ssh default vi mode
+ssh() {
+	if [ "$#" -eq 0 ]; then
+		/usr/bin/ssh
+	elif [ "$#" -eq 1 ]; then
+		/usr/bin/ssh "$1" -t bash -o vi
+	else
+		/usr/bin/ssh $@
+	fi
+}
 
 # operation
 alias cls="clear"
 alias copy="clipcopy"
 
 # proxy
-alias g="http_proxy=http://localhost:8123"
+alias q="http_proxy=http://localhost:8123"
 
 # xdg-open
-alias op="xdg-open"
+alias op="xdg-open > /dev/null"
 
 # translation
 alias z="trans :zh"
@@ -151,6 +168,11 @@ alias tt="trans :zh -sp -I"
 
 # git
 alias gsc="git svn dcommit --interactive"
+
+alias xmind='nohup /usr/local/xmind-8-update8-linux/XMind_amd64/XMind > /dev/null &'
+
+# kettle spoon
+alias spoon='nohup /usr/local/data-integration-8.2-bigdata/spoon.sh > /dev/null &'
 
 # cscope
 export CSCOPE_DB=/home/limeng/.cscope/cscope_db
@@ -166,3 +188,7 @@ export PATH=$PATH:/usr/local/go/bin
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# kubectx and kubens
+export PATH=~/.kubectx:$PATH
+

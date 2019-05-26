@@ -122,6 +122,7 @@ nnoremap <leader>ff :NERDTreeFind<cr>
 Plug 'kien/ctrlp.vim'
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/target/*,*/node_modules/*
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_root_markers = ['.root']
 
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
@@ -133,6 +134,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 Plug 'tpope/vim-fugitive'
 nnoremap <leader>gs :Gstatus<cr>
+
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Plug 'hotoo/pangu.vim'
 
@@ -170,6 +173,7 @@ map <Plug>(easymotion-prefix)l <Plug>(easymotion-lineforward)
 map <Plug>(easymotion-prefix)h <Plug>(easymotion-linebackward)
 
 Plug 'vim-scripts/fcitx.vim'
+" Plug 'kevinhwang91/vim-ibus-sw'
 set ttimeoutlen=100
 
 " Plug 'junegunn/vim-easy-align'
@@ -209,7 +213,7 @@ augroup END
 " augroup END
 
 Plug 'vimwiki/vimwiki'
-:nmap <Leader>wk <Plug>VimwikiIndex
+:nmap <Leader>wK <Plug>VimwikiIndex
 let wiki = {}
 let wiki.path = '~/vimwiki/'
 let wiki.auto_toc=1
@@ -302,13 +306,14 @@ nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 " let g:ycm_server_python_interpreter='/usr/bin/python'
 " let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 
-" 复制文件名
 nnoremap  co :cw<CR>
-nnoremap  cq :ccl<CR>
+nnoremap  cx :ccl<CR>
 nnoremap  cn :cn<CR>
 nnoremap  cp :cp<CR>
 
-nnoremap  <leader>yf :let @"=expand("%:p")<CR>
+" 复制文件名
+nnoremap  <leader>yfn :let @+=expand("%:t")<CR> :let @"=expand("%:t")<CR>
+nnoremap  <leader>yfp :let @+=expand("%:p")<CR> :let @"=expand("%:p")<CR>
 
 " 转义Alt键
 let c='a'
@@ -319,8 +324,8 @@ while c <= 'z'
 endw
 
 " switch tab
-:nn <M-h> gT<CR>
-:nn <M-l> gt<CR>
+" :nn <M-h> gT<CR>
+" :nn <M-l> gt<CR>
 
 " 解决UltiSnips YouCompleteMe冲突
 function! g:UltiSnips_Complete()
@@ -380,9 +385,12 @@ nmap <leader>z :call Zoom()<CR>
 
 " 翻译
 Plug 'VincentCordobes/vim-translate'
-nnoremap <silent> <C-T> :<C-u>Translate<CR>
-vnoremap <silent> <C-T> :<C-u>TranslateVisual<CR>
 let g:translate#default_languages={'en': 'zh'}
+nnoremap <silent> <leader>tt :<C-u>Translate<CR>
+vnoremap <silent> <leader>tt :<C-u>TranslateVisual<CR>
+nnoremap <silent> <leader>tw viw :TranslateVisual<CR>
+nnoremap <silent> <leader>tp vip :TranslateVisual<CR>
+nnoremap <silent> <leader>tq :TranslateClear<CR>
 
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
@@ -403,12 +411,12 @@ nmap <leader>f9 :set foldlevel=9<CR>
 
 " Some helpers to edit mode
 " http://vimcasts.org/e/14
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
-map <leader>ew :e %%
-map <leader>es :sp %%
-map <leader>ev :vsp %%
+" cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+" map <leader>ew :e %%
+" map <leader>es :sp %%
+" map <leader>ev :vsp %%
 " map <leader>et :tabe %%
-map <leader>et :TabooOpen
+" map <leader>et :TabooOpen
 
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
@@ -418,7 +426,7 @@ vnoremap <A-l> >gv
 
 " AutoCloseTag
 Plug 'vim-scripts/HTML-AutoCloseTag'
-au FileType xhtml,xml,vue,js,jsp ru ftplugin/html/autoclosetag.vim
+au FileType html,xhtml,xml,vue,js,jsp ru ftplugin/html/autoclosetag.vim
 nmap <Leader>ac <Plug>ToggleAutoCloseMappings
 
 Plug 'mbbill/undotree'
@@ -477,9 +485,13 @@ set foldlevelstart=99
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 autocmd FileType vue syntax sync fromstart
 
+
+" angular
+" Plug 'burnettk/vim-angular'
+
 " vue
 " Plug 'vim-syntastic/syntastic'
-Plug 'vuejs/eslint-plugin-vue'
+" Plug 'vuejs/eslint-plugin-vue'
 Plug 'cakebaker/scss-syntax.vim'
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css.js.scss
 au BufNewFile,BufRead *.vue set tabstop=2 | set softtabstop=2 | set shiftwidth=2 | set expandtab | set autoindent | set fileformat=unix
@@ -495,8 +507,8 @@ au BufNewFile,BufRead *.vue set tabstop=2 | set softtabstop=2 | set shiftwidth=2
 " 系统剪贴板
 vnoremap <leader>y "+y
 nnoremap <leader>y "+y
-vnoremap <leader>p "+p<CR>
-nnoremap <leader>p "+p<CR>
+vnoremap <leader>p "+p
+nnoremap <leader>p "+p
 
 nnoremap <leader>vs :vs<CR>
 nnoremap <leader>sp :sp<CR>
@@ -509,6 +521,5 @@ nnoremap <leader>ww :Windows<CR>
 
 " sudo
 map <leader>sudo :w !sudo tee %
-
 
 call plug#end()

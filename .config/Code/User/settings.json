@@ -30,6 +30,12 @@
     "todohighlight.isEnable": true,
     "keyboard.dispatch": "keyCode",
 
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/*/**": true
+    },
+
     //vim
     "vim.easymotion": true,
     "vim.sneak": true,
@@ -39,43 +45,43 @@
     "vim.hlsearch": true,
     "vim.insertModeKeyBindings": [],
     "vim.normalModeKeyBindingsNonRecursive": [
-      { 
+      {
         "before": ["<leader>", "q"],
         "commands":[":wq"]
       },
-      { 
+      {
         "before": ["<leader>", "w"],
         "commands":[":w"]
       },
-      { 
+      {
         "before": ["<leader>", "v", "s"],
         "commands":[":vs"]
       },
-      { 
+      {
         "before": ["<leader>", "s", "p"],
         "commands":[":sp"]
       },
-      { 
+      {
         "before": ["<C-h>"],
         "after":["<C-w>", "h"]
       },
-      { 
+      {
         "before": ["<C-l>"],
         "after":["<C-w>", "l"]
       },
-      { 
+      {
         "before": ["<C-j>"],
         "after":["<C-w>", "j"]
       },
-      { 
+      {
         "before": ["<C-k>"],
         "after":["<C-w>", "k"]
       },
-      { 
+      {
         "before": ["t", "n"],
         "after":["g", "t"]
       },
-      { 
+      {
         "before": ["t", "p"],
         "after":["g", "T"]
       },
@@ -102,5 +108,8 @@
     "vim.handleKeys": {
       "<C-a>": false,
       "<C-f>": false
-    }
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }

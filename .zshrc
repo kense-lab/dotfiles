@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/limeng/.oh-my-zsh"
+  export ZSH="/home/kense/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -75,6 +75,9 @@ plugins=(
   kubectl
   zsh-autosuggestions
   autojump
+  fzf
+  zsh-completions
+  docker
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -108,11 +111,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export DEFAULT_USER="limeng"
+export DEFAULT_USER="kense"
 
 # autojump
-[[ -s /home/limeng/.autojump/etc/profile.d/autojump.sh ]] && source /home/limeng/.autojump/etc/profile.d/autojump.sh
-# autoload -U compinit && compinit -u
+[[ -s /home/kense/.autojump/etc/profile.d/autojump.sh ]] && source /home/kense/.autojump/etc/profile.d/autojump.sh
+
+# docker autocomplete
+autoload -U compinit && compinit -u
 
 # 在命令执行的过程中，使用小红点进行提示
 COMPLETION_WAITING_DOTS="true"
@@ -153,7 +158,7 @@ alias cls="clear"
 alias copy="clipcopy"
 
 # proxy
-alias q="http_proxy=http://localhost:8123"
+alias q="http_proxy=http://127.0.0.1:12333"
 
 # xdg-open
 alias op="xdg-open > /dev/null"
@@ -174,11 +179,14 @@ alias xmind='nohup /usr/local/xmind-8-update8-linux/XMind_amd64/XMind > /dev/nul
 # kettle spoon
 alias spoon='nohup /usr/local/data-integration-8.2-bigdata/spoon.sh > /dev/null &'
 
+# docker
+alias docker-rmi-none="docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi"
+
 # cscope
-export CSCOPE_DB=/home/limeng/.cscope/cscope_db
+export CSCOPE_DB=/home/kense/.cscope/cscope_db
 
 # helm autocompletions
-source <(helm completion zsh)
+# source <(helm completion zsh)
 
 # default editor
 export EDITOR=/usr/bin/vim
@@ -186,9 +194,13 @@ export EDITOR=/usr/bin/vim
 # go
 export PATH=$PATH:/usr/local/go/bin
 
+# kettle spoon
+alias spoon='nohup /usr/share/data-integration-8.2-bigdata/spoon.sh > /dev/null &'
+
 # fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # kubectx and kubens
 export PATH=~/.kubectx:$PATH
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

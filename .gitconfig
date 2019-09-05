@@ -31,4 +31,4 @@
 	br = branch
 	unstage = reset HEAD --
 	dc = diff --cached
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %Cblue<%an>%Creset' --date=format:'%F %T' --abbrev-commit --all
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %Cblue<%an>%Creset' --date=format:'%F %T' --date=local --abbrev-commit --all

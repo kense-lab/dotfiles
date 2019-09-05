@@ -12,7 +12,7 @@ new_window pixel 1
 new_float normal
 
 # Hide borders
-hide_edge_borders none
+hide_edge_borders smart
 
 # change borders
 bindsym $mod+u border none
@@ -85,10 +85,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left 50 px
+bindsym $mod+Shift+j move down 50 px
+bindsym $mod+Shift+k move up 50 px
+bindsym $mod+Shift+l move right 50 px
 
 
 # workspace back and forth (with/without active container)
@@ -204,6 +204,7 @@ for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
+for_window [class="electronic-wechat"] move scratchpad
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -275,6 +276,7 @@ exec --no-startup-id keynav
 # exec --no-startup-id /usr/bin/xmodmap /home/hs/.Xmodmap
 exec --no-startup-id i3-msg 'workspace 1:terminal; exec gnome-terminal -e "tmux"'
 exec --no-startup-id i3-msg 'workspace 2:chromium; exec chromium'
+exec --no-startup-id electronic-wechat
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
@@ -413,7 +415,13 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-exec /home/hs/.screenlayout/company.sh
+exec /home/kense/.screenlayout/company.sh
+exec /home/kense/.auto-switch-device.sh
+
+exec /usr/bin/xset r rate 250 30
 
 bindsym $mod+Shift+Left move workspace to output left
 bindsym $mod+Shift+Right move workspace to output right
+
+floating_minimum_size 600 x 300
+floating_maximum_size 1920 x 1080

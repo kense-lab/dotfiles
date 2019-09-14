@@ -8,7 +8,7 @@ set $mod Mod4
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-new_window pixel 1
+new_window pixel 2
 new_float normal
 
 # Hide borders
@@ -16,7 +16,7 @@ hide_edge_borders smart
 
 # change borders
 bindsym $mod+u border none
-bindsym $mod+y border pixel 1
+bindsym $mod+y border pixel 2
 bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -132,12 +132,12 @@ bindsym $mod+minus scratchpad show
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 1:terminal
-set $ws2 2:chromium
-set $ws3 3
-set $ws4 4
-set $ws5 5
-set $ws6 6
+set $ws1 1:1 terminal
+set $ws2 2:2 chromium
+set $ws3 3:3 ide
+set $ws4 4:4 database
+set $ws5 5:5 document
+set $ws6 6:6 notes
 set $ws7 7
 set $ws8 8
 
@@ -172,10 +172,17 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
+# xprop -name pcmanfm | grep CLASS
+#
 # assign [class="Thunderbird"] $ws1
 # assign [class="Pale moon"] $ws2
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
+assign [class="DBeaver"] $ws4
+assign [class="nixnote2"] $ws6
+assign [class="idea"] $ws3
+assign [class="Pcmanfm"] $ws5
+assign [class="Chromium"] $ws2
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -274,8 +281,8 @@ exec --no-startup-id fcitx
 exec --no-startup-id keynav
 # exec --no-startup-id /home/hs/bin/ssctl.py start
 # exec --no-startup-id /usr/bin/xmodmap /home/hs/.Xmodmap
-exec --no-startup-id i3-msg 'workspace 1:terminal; exec gnome-terminal -e "tmux"'
-exec --no-startup-id i3-msg 'workspace 2:chromium; exec chromium'
+exec --no-startup-id i3-msg 'workspace 1:1 terminal; exec gnome-terminal -e "tmux"'
+exec --no-startup-id i3-msg 'workspace 2:2 chromium; exec chromium'
 exec --no-startup-id electronic-wechat
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb

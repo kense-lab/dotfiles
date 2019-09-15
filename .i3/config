@@ -424,6 +424,7 @@ mode "$mode_gaps_outer" {
 
 exec /home/kense/.screenlayout/company.sh
 exec /home/kense/.auto-switch-device.sh
+exec rslsync --config /home/kense/.rslsync.conf
 
 exec /usr/bin/xset r rate 250 30
 

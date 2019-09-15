@@ -131,6 +131,7 @@ bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
+bindkey '^Z' clear-screen
 
 function zle-line-init zle-keymap-select {
 	VIM_PROMPT="%{$fg_bold[yellow]%} -- % NORMAL --% %{$reset_color%}"

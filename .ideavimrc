@@ -1,47 +1,56 @@
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-set showmode
-set number
-set relativenumber
-set scrolloff=3
-set history=100000
+source ~/.vim/vimrc
+
+set noundofile
+set nobackup
+set noswapfile
+
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
 
 set surround
 set multiple-cursors
+set showmode
+set hlsearch
+set incsearch
 
-" clear the highlighted search result
-nnoremap <Space>sc :nohlsearch<CR>
+set so=5
 
-" nnoremap <Space>w :w<CR>
+nnoremap <Leader>su :action ShowUsages<CR>
 
-" Quit normal mode
-nnoremap <Space>q  :q<CR>
-nnoremap <Space>Q  :qa!<CR>
+nnoremap <Leader>fu :action FindUsages<CR>
 
-" nnoremap H ^
-" nnoremap L $
+nnoremap <Leader><space> a<space><ESC>:action CodeCompletion<CR>
 
-" Window operation
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
-nnoremap <Space>sp <C-W>s
-nnoremap <Space>vs <C-W>v
+nnoremap <C-n> :action GotoClass<CR>
+nnoremap <leader>gc :action GotoClass<CR>
 
-" Tab operation
-nnoremap tn gt
-nnoremap tp gT
+nnoremap <leader>fe :action RecentFiles<CR>
 
-" built in search looks better
-nnoremap <Space>/ /
-" but preserve ideavim search
-nnoremap / :action Find<CR>
+nnoremap <C-p> :action GotoFile<CR>
 
-nnoremap <Space>gc :action GotoClass<CR>
-nnoremap <Space>ga :action GotoAction<CR>
+nnoremap <C-S-o> :action OverrideMethods<CR>
 
-nnoremap <Space>fp :action ShowFilePath<CR>
-nnoremap <Space>pm :action ShowPopupMenu<CR>
+nnoremap <leader>ss :action FileStructurePopup<CR>
+
+nnoremap <C-S-p> :action ParameterInfo<CR>
+
+nnoremap <C-q> :action QuickJavaDoc<CR>
+
+nnoremap <leader>hc :action TypeHierarchy<CR>
+
+nnoremap <leader>hm :action MethodHierarchy<CR>
+
+nnoremap gd :action GotoDeclaration<CR>
+
+nnoremap gi :action GotoImplementation<CR>
+
+nnoremap <leader>fm :action ReformatCode<CR>
+
+nnoremap <Leader>oi :action OptimizeImports<CR>
+
+nnoremap <Leader>nc :action NewClass<CR>
+nnoremap <Leader>np :action NewDir<CR>
+nnoremap <Leader>nf :action NewFile<CR>
+

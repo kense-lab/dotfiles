@@ -115,6 +115,7 @@ augroup END
 Plug 'romainl/vim-cool'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+" let NERDTreeShowBookmarks=1
 nnoremap <leader>fe :NERDTreeToggle<cr>
 nnoremap <leader>ff :NERDTreeFind<cr>
 
@@ -123,6 +124,11 @@ Plug 'kien/ctrlp.vim'
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/target/*,*/node_modules/*
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_root_markers = ['.root']
+let g:ctrlp_prompt_mappings = {
+			\ 'PrtSelectMove("j")': ['<c-n>', '<down>'],
+			\ 'PrtSelectMove("k")': ['<c-p>', '<up>'],
+			\ 'PrtHistory(-1)': ['<c-j>'],
+			\ 'PrtHistory(1)': ['<c-k>']}
 
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
@@ -176,9 +182,9 @@ Plug 'vim-scripts/fcitx.vim'
 " Plug 'kevinhwang91/vim-ibus-sw'
 set ttimeoutlen=100
 
-" Plug 'junegunn/vim-easy-align'
-" xnoremap ga <Plug>(EasyAlign)
-" nnoremap ga <Plug>(EasyAlign)
+Plug 'junegunn/vim-easy-align'
+vmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 Plug 'gcmt/taboo.vim'
 
@@ -213,7 +219,9 @@ augroup END
 " augroup END
 
 Plug 'vimwiki/vimwiki'
-:nmap <Leader>wK <Plug>VimwikiIndex
+nmap <Leader>wK <Plug>VimwikiIndex
+nmap <Leader>wHH <Plug>Vimwiki2HTMLBrowse
+nmap <Leader>wT <Plug>VimwikiTabIndex
 let wiki = {}
 let wiki.path = '~/vimwiki/'
 let wiki.auto_toc=1
@@ -520,6 +528,17 @@ nnoremap <leader>mm :Marks<CR>
 nnoremap <leader>ww :Windows<CR>
 
 " sudo
-map <leader>sudo :w !sudo tee %
+map <leader>sudo :w !sudo tee %<CR><CR><CR>L
+
+" markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'suan/vim-instant-markdown'
+let g:instant_markdown_autostart = 0
+
+" mattn/gist-vim
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
+
 
 call plug#end()

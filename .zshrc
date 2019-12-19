@@ -159,7 +159,7 @@ alias cls="clear"
 alias copy="clipcopy"
 
 # proxy
-alias q="http_proxy=http://127.0.0.1:12333"
+alias q="http_proxy=http://127.0.0.1:7890"
 
 # xdg-open
 alias op="xdg-open > /dev/null"
@@ -192,6 +192,9 @@ export CSCOPE_DB=/home/kense/.cscope/cscope_db
 # default editor
 export EDITOR=/usr/bin/vim
 
+# gist default browser
+export BROWSER=chromium
+
 # go
 export PATH=$PATH:/usr/local/go/bin
 
@@ -204,4 +207,6 @@ alias spoon='nohup /usr/share/data-integration-8.2-bigdata/spoon.sh > /dev/null 
 export PATH=~/.kubectx:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source /usr/share/nvm/init-nvm.sh
 

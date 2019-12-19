@@ -94,6 +94,7 @@ bindsym $mod+Shift+l move right 50 px
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
+bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
@@ -183,6 +184,7 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
 assign [class="DBeaver"] $ws4
+assign [class="datagrip"] $ws4
 # assign [class="idea"] $ws3
 assign [class="Pcmanfm"] $ws6
 assign [class="Chromium"] $ws2
@@ -286,7 +288,7 @@ exec --no-startup-id keynav
 exec --no-startup-id /usr/bin/xmodmap /home/kense/.Xmodmap
 exec --no-startup-id i3-msg 'workspace 1:1 terminal; exec gnome-terminal -e "tmux"'
 exec --no-startup-id i3-msg 'workspace 2:2 chromium; exec chromium'
-exec --no-startup-id electronic-wechat
+# exec --no-startup-id electronic-wechat
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
@@ -427,10 +429,11 @@ mode "$mode_gaps_outer" {
 
 exec /home/kense/.screenlayout/company.sh
 exec /home/kense/.auto-switch-device.sh
-exec electron-ssr
+# exec electron-ssr
 exec rslsync --config /home/kense/.rslsync.conf
 
 exec /usr/bin/xset r rate 250 30
+exec --no-startup-id xset dpms 3600 3600
 
 bindsym $mod+Shift+Left move workspace to output left
 bindsym $mod+Shift+Right move workspace to output right

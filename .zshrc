@@ -201,6 +201,8 @@ export PATH=$PATH:/usr/local/go/bin
 # kettle spoon
 alias spoon='nohup /usr/share/data-integration-8.2-bigdata/spoon.sh > /dev/null &'
 
+alias emacsclient='nohup emacsclient -c > /dev/null &'
+
 # fzf
 
 # kubectx and kubens

@@ -431,6 +431,7 @@ exec /home/kense/.screenlayout/company.sh
 exec /home/kense/.auto-switch-device.sh
 # exec electron-ssr
 exec rslsync --config /home/kense/.rslsync.conf
+exec /usr/bin/emacs --daemon
 
 exec /usr/bin/xset r rate 250 30
 exec --no-startup-id xset dpms 3600 3600

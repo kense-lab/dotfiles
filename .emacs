@@ -54,6 +54,11 @@
 ;; Default Full Screen
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+;; Scroll
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+(setq scroll-margin 3)
+(setq scroll-step 3)
+
 ;; Enable Evil
 (evil-mode 1)
 
@@ -61,11 +66,11 @@
 (setq evil-leader/in-all-states 1)
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
-(global-set-key (kbd "C-u") 'evil-scroll-page-up)
+(global-set-key (kbd "C-u") 'evil-scroll-up)
 (global-set-key (kbd "C-S-u") 'start-kbd-macro)
 (evil-leader/set-key
   "fe" 'neotree-toggle
-  "ff" 'neotree-find
+  "ff" 'neotree-project-dir-toggle
   "q" 'delete-window
   "w" 'save-buffer
   "ps" 'helm-projectile-ag
@@ -106,6 +111,28 @@
                                         ;(setq neo-smart-open t)
   (setq projectile-switch-project-action 'neotree-projectile-action))
 
+(defun neotree-project-dir-toggle ()
+  "Open NeoTree using the project root, using find-file-in-project,
+or the current buffer directory."
+  (interactive)
+  (let ((project-dir
+         (ignore-errors
+              ;;; Pick one: projectile or find-file-in-project
+                                        ; (projectile-project-root)
+           (ffip-project-root)
+           ))
+        (file-name (buffer-file-name))
+        (neo-smart-open t))
+    (if (and (fboundp 'neo-global--window-exists-p)
+             (neo-global--window-exists-p))
+        (neotree-hide)
+      (progn
+        (neotree-show)
+        (if project-dir
+            (neotree-dir project-dir))
+        (if file-name
+            (neotree-find file-name))))))
+
 ;; Window
 (define-key evil-motion-state-map (kbd "C-h") #'evil-window-left)
 (define-key evil-motion-state-map (kbd "C-j") #'evil-window-down)
@@ -141,7 +168,7 @@
 (helm-projectile-on)
 (define-key evil-normal-state-map (kbd "C-n") nil)
 (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)
-(global-set-key (kbd "C-S-p") 'helm-projectile-find-file-in-known-projects)
+(global-set-key (kbd "C-S-p") 'helm-projectile-find-file)
 (define-key evil-insert-state-map (kbd "C-n") 'ac-start)
 (define-key evil-insert-state-map (kbd "C-p") 'ac-start)
 (setq projectile-require-project-root nil)
@@ -149,6 +176,7 @@
 (setq projectile-indexing-method 'native)
 (setq projectile-globally-ignored-directories
       (append '(
+                ".vim"
                 ".git"
                 ".svn"
                 ".idea"
@@ -164,36 +192,36 @@
               projectile-globally-ignored-files))
 
 ;; Buffer
-                                        ;(global-set-key (kbd "M-p") 'previous-buffer)
-                                        ;(global-set-key (kbd "M-n") 'next-buffer)
+(global-set-key (kbd "M-p") 'previous-buffer)
+(global-set-key (kbd "M-n") 'next-buffer)
 
 ;; Tabs
-(use-package awesome-tab
-  :load-path "/home/kense/.emacs.d/plugins/awesome-tab/"
-  :init
-  (evil-define-key 'normal awesome-tab-mode-map (kbd "g t") 'awesome-tab-forward-tab)
-  (evil-define-key 'normal awesome-tab-mode-map (kbd "t n") 'awesome-tab-forward-tab)
-  (evil-define-key 'normal awesome-tab-mode-map (kbd "t p") 'awesome-tab-backward-tab)
-  (evil-define-key 'normal awesome-tab-mode-map (kbd "g T") 'awesome-tab-backward-tab)
-  :config
-  (awesome-tab-mode t)
-  (setq awesome-tab-style "zigzag"))
+;; (use-package awesome-tab
+;;   :load-path "/home/kense/.emacs.d/plugins/awesome-tab/"
+;;   :init
+;;   (evil-define-key 'normal awesome-tab-mode-map (kbd "g t") 'awesome-tab-forward-tab)
+;;   (evil-define-key 'normal awesome-tab-mode-map (kbd "t n") 'awesome-tab-forward-tab)
+;;   (evil-define-key 'normal awesome-tab-mode-map (kbd "t p") 'awesome-tab-backward-tab)
+;;   (evil-define-key 'normal awesome-tab-mode-map (kbd "g T") 'awesome-tab-backward-tab)
+;;   :config
+;;   (awesome-tab-mode t)
+;;   (setq awesome-tab-style "zigzag"))
 
-;; (defun awesome-tab-buffer-groups-function (x)
+;; ;; (defun awesome-tab-buffer-groups-function (x)
 
-(defun awesome-tab-hide-tab (x)
-  (let ((name (format "%s" x)))
-    (or
-     (string-prefix-p "*" name)
-     (string-prefix-p " *" name)
-     (and (string-prefix-p "magit" name)
-          (not (file-name-extension name)))
-     )))
+;; (defun awesome-tab-hide-tab (x)
+;;   (let ((name (format "%s" x)))
+;;     (or
+;;      (string-prefix-p "*" name)
+;;      (string-prefix-p " *" name)
+;;      (and (string-prefix-p "magit" name)
+;;           (not (file-name-extension name)))
+;;      )))
+;; (global-set-key (kbd "M-p") 'awesome-tab-forward-group)
+;; (global-set-key (kbd "M-n") 'awesome-tab-backward-group)
 
 ;; Magit
 (require 'evil-magit)
-(global-set-key (kbd "M-p") 'awesome-tab-forward-group)
-(global-set-key (kbd "M-n") 'awesome-tab-backward-group)
 
 ;; Esc quits
 (defun minibuffer-keyboard-quit ()
@@ -239,6 +267,15 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (define-key ac-completing-map (kbd "C-n") 'ac-expand)
   )
 
+;; Use C-tab to autocomplete the files and directories
+;; based on the two commands `comint-dynamic-complete-filename`
+;; and `comint-dynamic-list-filename-completions`
+(defun atfd ()
+  (interactive)
+  ;; (comint-dynamic-list-filename-completions)
+  (comint-dynamic-complete-as-filename))
+(global-set-key ( kbd "C-c k" ) 'atfd)
+
 (defun my-code-mode-config ()
   (hs-minor-mode t)
   (auto-fill-mode 0)
@@ -259,7 +296,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
               indent-tabs-mode t)
 
 (use-package web-mode
-  :mode ("\\.vue\\'" "\\.js\\'" "\\.wxml\\'")
+  :mode ("\\.vue\\'" "\\.html\\'" "\\.js\\'" "\\.css\\'" "\\.scss\\'" "\\.wxml\\'")
   :config
   (setq-default indent-tabs-mode nil)
   (setq web-mode-indent-level 2)

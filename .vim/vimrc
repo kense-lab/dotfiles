@@ -526,6 +526,7 @@ Plug '/usr/local/fzf'
 Plug 'junegunn/fzf.vim'
 nnoremap <leader>mm :Marks<CR>
 nnoremap <leader>ww :Windows<CR>
+nnoremap <leader>bb :BuffersToggle<CR>
 
 " sudo
 map <leader>sudo :w !sudo tee %<CR><CR><CR>L
@@ -539,6 +540,5 @@ let g:instant_markdown_autostart = 0
 " mattn/gist-vim
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
-
 
 call plug#end()

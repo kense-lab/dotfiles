@@ -20,7 +20,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode vue-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
+    (jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode vue-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -78,6 +78,7 @@
   ;; "bb" 'buffer-menu-other-window
   "mm" 'helm-mark-ring
   "bb" 'helm-buffers-list
+  "bp" 'helm-projectile-switch-to-buffer
   )
 
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
@@ -92,7 +93,7 @@
   :ensure t
   :init
   (setq neo-window-fixed-size nil)
-  (setq neo-window-width 30)
+  (setq neo-window-width 40)
   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
   (evil-define-key 'normal neotree-mode-map (kbd "o") 'neotree-enter)
@@ -168,7 +169,7 @@ or the current buffer directory."
 (helm-projectile-on)
 (define-key evil-normal-state-map (kbd "C-n") nil)
 (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)
-(global-set-key (kbd "C-S-p") 'helm-projectile-find-file)
+(global-set-key (kbd "C-S-p") 'helm-projectile-switch-project)
 (define-key evil-insert-state-map (kbd "C-n") 'ac-start)
 (define-key evil-insert-state-map (kbd "C-p") 'ac-start)
 (setq projectile-require-project-root nil)

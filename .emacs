@@ -149,7 +149,7 @@ or the current buffer directory."
 (scroll-bar-mode 0)
 
 ;; Fcitx
-(add-to-list 'load-path "/home/kense/.emacs.d/plugins/evil-fcitx")
+(add-to-list 'load-path "~/.emacs.d/plugins/evil-fcitx")
 (require 'evil-fcitx)
 
 ;; Helm
@@ -198,7 +198,7 @@ or the current buffer directory."
 
 ;; Tabs
 ;; (use-package awesome-tab
-;;   :load-path "/home/kense/.emacs.d/plugins/awesome-tab/"
+;;   :load-path "~/.emacs.d/plugins/awesome-tab/"
 ;;   :init
 ;;   (evil-define-key 'normal awesome-tab-mode-map (kbd "g t") 'awesome-tab-forward-tab)
 ;;   (evil-define-key 'normal awesome-tab-mode-map (kbd "t n") 'awesome-tab-forward-tab)
@@ -278,6 +278,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (add-to-list 'ac-modes 'groovy-mode)
   (add-to-list 'ac-modes 'bat-mode)
   (add-to-list 'ac-modes 'conf-javaprop-mode)
+  (add-to-list 'ac-modes 'conf-unix-mode)
   )
 
 ;; Use C-tab to autocomplete the files and directories

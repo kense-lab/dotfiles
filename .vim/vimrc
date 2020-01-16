@@ -274,15 +274,15 @@ set sessionoptions+=globals
 Plug 'tpope/vim-obsession'
 
 " eclim
-let g:EclimLoggingDisabled=1
-augroup java
-       au!
-       au FileType java nnoremap <buffer> <leader>o :call eclim#java#import#OrganizeImports()<cr>
-       au FileType java nnoremap <buffer> <leader>i :call eclim#java#correct#Correct()<cr>
-       au FileType java nnoremap <buffer> gd :JavaSearch -x declarations<cr>
-       au FileType java nnoremap <buffer> gi :JavaSearch -x implementors<cr>
-       au FileType java inoremap <buffer> <c-d> <c-x><c-u>
-augroup END
+" let g:EclimLoggingDisabled=1
+" augroup java
+"        au!
+"        au FileType java nnoremap <buffer> <leader>o :call eclim#java#import#OrganizeImports()<cr>
+"        au FileType java nnoremap <buffer> <leader>i :call eclim#java#correct#Correct()<cr>
+"        au FileType java nnoremap <buffer> gd :JavaSearch -x declarations<cr>
+"        au FileType java nnoremap <buffer> gi :JavaSearch -x implementors<cr>
+"        au FileType java inoremap <buffer> <c-d> <c-x><c-u>
+" augroup END
 
 " java
 " Plug 'artur-shaik/vim-javacomplete2'
@@ -429,8 +429,6 @@ nmap <leader>f9 :set foldlevel=9<CR>
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv
-vnoremap <A-h> <gv
-vnoremap <A-l> >gv
 
 " AutoCloseTag
 Plug 'vim-scripts/HTML-AutoCloseTag'
@@ -527,6 +525,15 @@ Plug 'junegunn/fzf.vim'
 nnoremap <leader>mm :Marks<CR>
 nnoremap <leader>ww :Windows<CR>
 nnoremap <leader>bb :BuffersToggle<CR>
+nnoremap <leader>ss :Ag<CR>
+nnoremap <C-p> :CtrlP<CR>
+
+" buffer
+nnoremap <leader>bp :bprevious<CR>
+nnoremap <leader>bn :bnext<CR>
+
+nnoremap <M-p> :bprevious<CR>
+nnoremap <M-n>bn :bnext<CR>
 
 " sudo
 map <leader>sudo :w !sudo tee %<CR><CR><CR>L

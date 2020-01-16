@@ -20,7 +20,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode vue-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
+    (groovy-mode jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode vue-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -75,7 +75,7 @@
   "w" 'save-buffer
   "ps" 'helm-projectile-ag
   ;; "mm" 'evil-show-marks
-  ;; "bb" 'buffer-menu-other-window
+  ;; "bb" 'ibuffer-other-window
   "mm" 'helm-mark-ring
   "bb" 'helm-buffers-list
   "bp" 'helm-projectile-switch-to-buffer
@@ -257,6 +257,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 ;; Auto complate
 (require 'auto-complete-config)
+(global-auto-complete-mode t)
 (use-package auto-complete
   :ensure t
   :config
@@ -266,6 +267,17 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (setq ac-quick-help-delay 0.5)
   (define-key ac-completing-map (kbd "C-p") 'ac-expand-previous)
   (define-key ac-completing-map (kbd "C-n") 'ac-expand)
+  (add-to-list 'ac-modes 'fundamental-mode)
+  (add-to-list 'ac-modes 'dockerfile-mode)
+  (add-to-list 'ac-modes 'k8s-mode)
+  (add-to-list 'ac-modes 'xml-mode)
+  (add-to-list 'ac-modes 'nxml-mode)
+  (add-to-list 'ac-modes 'sql-mode)
+  (add-to-list 'ac-modes 'yaml-mode)
+  (add-to-list 'ac-modes 'markdown-mode)
+  (add-to-list 'ac-modes 'groovy-mode)
+  (add-to-list 'ac-modes 'bat-mode)
+  (add-to-list 'ac-modes 'conf-javaprop-mode)
   )
 
 ;; Use C-tab to autocomplete the files and directories
@@ -291,6 +303,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (global-hl-line-mode 1)
 
 (add-to-list 'auto-mode-alist '("\\.java\\'" . c-mode))
+;; (add-to-list 'auto-mode-alist '("\\**\\'" . auto-complete-modes))
 
 (setq-default c-basic-offset 4
               tab-width 4
@@ -336,4 +349,5 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     "tr" 'google-translate-at-point-reverse
     "tT" 'google-translate-query-translate
     "tR" 'google-translate-query-translate-reverse
+    "ts" 'google-translate-smooth-translate
     ))

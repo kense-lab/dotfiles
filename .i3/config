@@ -439,5 +439,8 @@ exec --no-startup-id xset dpms 3600 3600
 bindsym $mod+Shift+Left move workspace to output left
 bindsym $mod+Shift+Right move workspace to output right
 
+bindsym $mod+Prior workspace prev
+bindsym $mod+Next workspace next
+
 floating_minimum_size 600 x 300
 floating_maximum_size 1920 x 1080

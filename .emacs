@@ -263,8 +263,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   :ensure t
   :config
   (ac-config-default)
-  (setq ac-delay 0)
-  (setq ac-auto-show-menu 0)
+  (setq ac-delay 0.1)
+  (setq ac-auto-show-menu 0.1)
   (setq ac-quick-help-delay 0.5)
   (define-key ac-completing-map (kbd "C-p") 'ac-expand-previous)
   (define-key ac-completing-map (kbd "C-n") 'ac-expand)

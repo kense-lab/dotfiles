@@ -20,7 +20,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (groovy-mode jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode vue-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
+    (ace-jump-mode groovy-mode jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode vue-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -100,7 +100,8 @@
   (evil-define-key 'normal neotree-mode-map (kbd "K") 'neotree-select-up-node)
   (evil-define-key 'normal neotree-mode-map (kbd "J") 'neotree-select-down-node)
   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-  (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+  (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-refresh)
+  (evil-define-key 'normal neotree-mode-map (kbd "g g") 'evil-goto-first-line)
   (evil-define-key 'normal neotree-mode-map (kbd "y y") 'neotree-copy-filepath-to-yank-ring)
   (evil-define-key 'normal neotree-mode-map (kbd "X") 'neotree-collapse-all)
   (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
@@ -279,6 +280,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (add-to-list 'ac-modes 'bat-mode)
   (add-to-list 'ac-modes 'conf-javaprop-mode)
   (add-to-list 'ac-modes 'conf-unix-mode)
+  (add-to-list 'ac-modes 'org-mode)
+  (add-to-list 'ac-modes 'shell-mode)
   )
 
 ;; Use C-tab to autocomplete the files and directories
@@ -351,4 +354,13 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     "tT" 'google-translate-query-translate
     "tR" 'google-translate-query-translate-reverse
     "ts" 'google-translate-smooth-translate
+    ))
+
+(use-package ace-jump-mode
+  :config
+  (evil-leader/set-key
+    "SPC w" 'ace-jump-word-mode
+    "SPC l" 'ace-jump-line-mode
+    "SPC c" 'ace-jump-char-mode
+    "SPC x" 'ace-jump-mode-pop-mark
     ))

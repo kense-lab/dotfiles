@@ -17,7 +17,7 @@ hide_edge_borders smart
 # change borders
 bindsym $mod+u border none
 bindsym $mod+y border pixel 2
-bindsym $mod+n border normal
+bindsym $mod+Shift+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -441,6 +441,8 @@ bindsym $mod+Shift+Right move workspace to output right
 
 bindsym $mod+Prior workspace prev
 bindsym $mod+Next workspace next
+bindsym $mod+p workspace prev
+bindsym $mod+n workspace next
 
 floating_minimum_size 600 x 300
 floating_maximum_size 1920 x 1080

@@ -20,7 +20,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (ace-jump-mode groovy-mode jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode vue-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
+    (helm-c-yasnippet yasnippet-snippets yasnippet ace-jump-mode groovy-mode jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -273,15 +273,17 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (add-to-list 'ac-modes 'k8s-mode)
   (add-to-list 'ac-modes 'xml-mode)
   (add-to-list 'ac-modes 'nxml-mode)
+  (add-to-list 'ac-modes 'html-mode)
+  (add-to-list 'ac-modes 'mhtml-mode)
   (add-to-list 'ac-modes 'sql-mode)
   (add-to-list 'ac-modes 'yaml-mode)
   (add-to-list 'ac-modes 'markdown-mode)
   (add-to-list 'ac-modes 'groovy-mode)
   (add-to-list 'ac-modes 'bat-mode)
   (add-to-list 'ac-modes 'conf-javaprop-mode)
-  (add-to-list 'ac-modes 'conf-unix-mode)
   (add-to-list 'ac-modes 'org-mode)
   (add-to-list 'ac-modes 'shell-mode)
+  (add-to-list 'ac-modes 'web-mode)
   )
 
 ;; Use C-tab to autocomplete the files and directories
@@ -299,24 +301,24 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   ;; (whitespace-mode t)
   (set (make-local-variable 'electric-indent-mode) nil))
 
+(defun my-java-mode-config ()
+  (setq-default c-basic-offset 4
+		tab-width 4
+		indent-tabs-mode t))
+
 (add-hook 'java-mode-hook 'my-code-mode-config)
-(add-hook 'web-mode-hook  'my-code-mode-config)
+(add-hook 'java-mode-hook 'my-java-mode-config)
 (add-hook 'emacs-lisp-mode-hook 'my-code-mode-config)
+(setq js-indent-level 2)
+
 
 ;; Global Options
 (global-hl-line-mode 1)
 
-(add-to-list 'auto-mode-alist '("\\.java\\'" . c-mode))
-;; (add-to-list 'auto-mode-alist '("\\**\\'" . auto-complete-modes))
-
-(setq-default c-basic-offset 4
-              tab-width 4
-              indent-tabs-mode t)
-
 (use-package web-mode
-  :mode ("\\.vue\\'" "\\.html\\'" "\\.js\\'" "\\.css\\'" "\\.scss\\'" "\\.wxml\\'")
+  ;; :mode ("\\.vue\\'" "\\.html\\'" "\\.js\\'" "\\.css\\'" "\\.scss\\'" "\\.wxml\\'")
+  :mode ("\\.vue\\'")
   :config
-  (setq-default indent-tabs-mode nil)
   (setq web-mode-indent-level 2)
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
@@ -338,7 +340,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
         (?\< . ?\>)))
 
 ;; Google Translate
-(use-package web-mode
+(use-package google-translate
   :config
   (setq-default google-translate-enable-ido-completion t)
   (setq-default google-translate-default-source-language "en")
@@ -356,6 +358,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     "ts" 'google-translate-smooth-translate
     ))
 
+;; ace jump mode
 (use-package ace-jump-mode
   :config
   (evil-leader/set-key
@@ -365,10 +368,11 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     "SPC x" 'ace-jump-mode-pop-mark
     ))
 
+;; new line
 (defun new-line-dwim ()
   (interactive)
   (let ((break-open-pair (or (and (looking-back "{") (looking-at "}"))
-                             (and (looking-back ">") (looking-at "<"))
+			     (and (looking-back ">") (looking-at "<"))
                              (and (looking-back "(") (looking-at ")"))
                              (and (looking-back "\\[") (looking-at "\\]")))))
     (newline)
@@ -379,3 +383,13 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     (indent-for-tab-command)))
 
 (define-key evil-insert-state-map (kbd "<RET>") 'new-line-dwim)
+
+;; yasnippet
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))
+(use-package yasnippet-snippets)
+
+;; Jenkins
+;; 11663f485158f02bc69a885b5abe52f0f9

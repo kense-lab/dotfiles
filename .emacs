@@ -20,7 +20,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (tmux-pane helm-c-yasnippet yasnippet-snippets yasnippet ace-jump-mode groovy-mode jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
+    (## tmux-pane helm-c-yasnippet yasnippet-snippets yasnippet ace-jump-mode groovy-mode jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -57,26 +57,30 @@
 (setq scroll-step 3)
 
 ;; Enable Evil
-(evil-mode 1)
-
-;; Enable Evil Leader
-(setq evil-leader/in-all-states 1)
-(global-evil-leader-mode)
-(evil-leader/set-leader "<SPC>")
-(global-set-key (kbd "C-u") 'evil-scroll-up)
-(global-set-key (kbd "C-S-u") 'start-kbd-macro)
-(evil-leader/set-key
-  "fe" 'neotree-toggle
-  "ff" 'neotree-project-dir-toggle
-  "q" 'delete-window
-  "w" 'save-buffer
-  "ps" 'helm-projectile-ag
-  ;; "mm" 'evil-show-marks
-  ;; "bb" 'ibuffer-other-window
-  "mm" 'helm-mark-ring
-  "bb" 'helm-buffers-list
-  "bp" 'helm-projectile-switch-to-buffer
-  )
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1)
+  ;; Enable Evil Leader
+  (setq evil-leader/in-all-states 1)
+  (global-evil-leader-mode)
+  (evil-leader/set-leader "<SPC>")
+  (global-set-key (kbd "C-u") 'evil-scroll-up)
+  (global-set-key (kbd "C-S-u") 'start-kbd-macro)
+  (evil-leader/set-key
+    "fe" 'neotree-toggle
+    "ff" 'neotree-project-dir-toggle
+    "q" 'delete-window
+    "w" 'save-buffer
+    "ps" 'helm-projectile-ag
+    ;; "mm" 'evil-show-marks
+    ;; "bb" 'ibuffer-other-window
+    "mm" 'helm-mark-ring
+    "bb" 'helm-buffers-list
+    "bp" 'helm-projectile-switch-to-buffer))
 
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
@@ -127,9 +131,8 @@ or the current buffer directory."
   (let ((project-dir
          (ignore-errors
               ;;; Pick one: projectile or find-file-in-project
-                                        ; (projectile-project-root)
-           (ffip-project-root)
-           ))
+           ;; (projectile-project-root)
+           (ffip-project-root)))
         (file-name (buffer-file-name))
         (neo-smart-open t))
     (if (and (fboundp 'neo-global--window-exists-p)
@@ -189,9 +192,7 @@ or the current buffer directory."
                 "node_modules")
               projectile-globally-ignored-directories))
 (setq projectile-globally-ignored-files
-      (append '(
-                ".DS_Store"
-                )
+      (append '(".DS_Store")
               projectile-globally-ignored-files))
 
 ;; Buffer
@@ -219,8 +220,7 @@ or the current buffer directory."
 ;;      (string-prefix-p "*" name)
 ;;      (string-prefix-p " *" name)
 ;;      (and (string-prefix-p "magit" name)
-;;           (not (file-name-extension name)))
-;;      )))
+;;           (not (file-name-extension name))))))
 ;; (global-set-key (kbd "M-p") 'awesome-tab-forward-group)
 ;; (global-set-key (kbd "M-n") 'awesome-tab-backward-group)
 
@@ -285,8 +285,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (add-to-list 'ac-modes 'conf-javaprop-mode)
   (add-to-list 'ac-modes 'org-mode)
   (add-to-list 'ac-modes 'shell-mode)
-  (add-to-list 'ac-modes 'web-mode)
-  )
+  (add-to-list 'ac-modes 'web-mode))
 
 ;; Use C-tab to autocomplete the files and directories
 ;; based on the two commands `comint-dynamic-complete-filename`
@@ -295,7 +294,15 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (interactive)
   ;; (comint-dynamic-list-filename-completions)
   (comint-dynamic-complete-as-filename))
-(global-set-key ( kbd "C-c k" ) 'atfd)
+(global-set-key (kbd "C-c k") 'atfd)
+
+;; Hs Special
+(add-to-list 'hs-special-modes-alist
+             '(web-mode
+               "<!--\\|<[^/>]*[^/]>"
+               "-->\\|</[^/>]*[^/]>"
+               "<!--"
+               nil))
 
 (defun my-code-mode-config ()
   (hs-minor-mode t)
@@ -305,12 +312,19 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 (defun my-java-mode-config ()
   (setq-default c-basic-offset 4
-		tab-width 4
-		indent-tabs-mode t))
+                tab-width 4
+                indent-tabs-mode t))
 
-(add-hook 'java-mode-hook 'my-code-mode-config)
+(defun my-lisp-mode-config ()
+  (setq-default c-basic-offset 2
+                tab-width 2
+                indent-tabs-mode nil))
+
+(add-hook 'prog-mode-hook 'my-code-mode-config)
+(add-hook 'nxml-mode-hook 'my-code-mode-config)
+
 (add-hook 'java-mode-hook 'my-java-mode-config)
-(add-hook 'emacs-lisp-mode-hook 'my-code-mode-config)
+(add-hook 'emacs-lisp-mode-hook 'my-lisp-mode-config)
 (setq js-indent-level 2)
 
 
@@ -326,7 +340,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
 
-;; pair
+;; Pair
 (require 'highlight-parentheses)
 (define-globalized-minor-mode global-highlight-parentheses-mode
   highlight-parentheses-mode
@@ -357,24 +371,22 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
     "tr" 'google-translate-at-point-reverse
     "tT" 'google-translate-query-translate
     "tR" 'google-translate-query-translate-reverse
-    "ts" 'google-translate-smooth-translate
-    ))
+    "ts" 'google-translate-smooth-translate))
 
-;; ace jump mode
+;; Ace Jump
 (use-package ace-jump-mode
   :config
   (evil-leader/set-key
     "SPC w" 'ace-jump-word-mode
     "SPC l" 'ace-jump-line-mode
     "SPC c" 'ace-jump-char-mode
-    "SPC x" 'ace-jump-mode-pop-mark
-    ))
+    "SPC x" 'ace-jump-mode-pop-mark))
 
-;; new line
+;; New Line
 (defun new-line-dwim ()
   (interactive)
   (let ((break-open-pair (or (and (looking-back "{") (looking-at "}"))
-			     (and (looking-back ">") (looking-at "<"))
+                             (and (looking-back ">") (looking-at "<"))
                              (and (looking-back "(") (looking-at ")"))
                              (and (looking-back "\\[") (looking-at "\\]")))))
     (newline)
@@ -386,17 +398,24 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 
 (define-key evil-insert-state-map (kbd "<RET>") 'new-line-dwim)
 
-;; yasnippet
+;; Yasnippet
 (use-package yasnippet
   :ensure t
   :config
   (yas-global-mode 1))
 (use-package yasnippet-snippets)
 
-;; tmux pane
+;; Tmux
 (use-package tmux-pane
   :ensure t
   :config
-  (tmux-pane-mode 1)
-  )
+  (tmux-pane-mode 1))
 
+;; Jenkins
+(use-package jenkins
+  :ensure t
+  :config
+  (setq jenkins-api-token "xxxx")
+  (setq jenkins-url "http://x.x.x.x:xxxx")
+  (setq jenkins-username "xxxx")
+  (setq jenkins-viewname "xxxx"))

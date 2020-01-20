@@ -20,17 +20,14 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (helm-c-yasnippet yasnippet-snippets yasnippet ace-jump-mode groovy-mode jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
+    (tmux-pane helm-c-yasnippet yasnippet-snippets yasnippet ace-jump-mode groovy-mode jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Consolas" :foundry "MS  " :slant normal :weight normal :height 120 :width normal)))))
-
-;; Enable Server Start
-                                        ;(server-start)
+ '(default ((t (:family "Fira Code" :foundry "CTDB" :slant normal :weight normal :height 120 :width normal)))))
 
 (require 'server)
 (unless (server-running-p) (server-start))
@@ -104,14 +101,24 @@
   (evil-define-key 'normal neotree-mode-map (kbd "g g") 'evil-goto-first-line)
   (evil-define-key 'normal neotree-mode-map (kbd "y y") 'neotree-copy-filepath-to-yank-ring)
   (evil-define-key 'normal neotree-mode-map (kbd "X") 'neotree-collapse-all)
+  (evil-define-key 'normal neotree-mode-map (kbd "x") 'neotree-close-parent)
   (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
   (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
   (evil-define-key 'normal neotree-mode-map (kbd "i") 'neotree-enter-horizontal-split)
   (evil-define-key 'normal neotree-mode-map (kbd "s") 'neotree-enter-vertical-split)
   (setq inhibit-compacting-font-caches t)
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-                                        ;(setq neo-smart-open t)
+  ;; (setq neo-smart-open t)
   (setq projectile-switch-project-action 'neotree-projectile-action))
+
+(defun neotree-close-parent ()
+  "Close parent directory of current node."
+  (interactive)
+  (neotree-select-up-node)
+  (let* ((btn-full-path (neo-buffer--get-filename-current-line))
+         (path (if btn-full-path btn-full-path neo-buffer--start-node)))
+    (when (file-name-directory path)
+      (if (neo-buffer--expanded-node-p path) (neotree-enter)))))
 
 (defun neotree-project-dir-toggle ()
   "Open NeoTree using the project root, using find-file-in-project,
@@ -134,12 +141,6 @@ or the current buffer directory."
             (neotree-dir project-dir))
         (if file-name
             (neotree-find file-name))))))
-
-;; Window
-(define-key evil-motion-state-map (kbd "C-h") #'evil-window-left)
-(define-key evil-motion-state-map (kbd "C-j") #'evil-window-down)
-(define-key evil-motion-state-map (kbd "C-k") #'evil-window-up)
-(define-key evil-motion-state-map (kbd "C-l") #'evil-window-right)
 
 ;; Org Mode
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
@@ -194,6 +195,7 @@ or the current buffer directory."
               projectile-globally-ignored-files))
 
 ;; Buffer
+(global-set-key (kbd "C-x C-b") 'ibuffer-other-window)
 (global-set-key (kbd "M-p") 'previous-buffer)
 (global-set-key (kbd "M-n") 'next-buffer)
 
@@ -391,5 +393,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (yas-global-mode 1))
 (use-package yasnippet-snippets)
 
-;; Jenkins
-;; 11663f485158f02bc69a885b5abe52f0f9
+;; tmux pane
+(use-package tmux-pane
+  :ensure t
+  :config
+  (tmux-pane-mode 1)
+  )
+

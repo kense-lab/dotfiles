@@ -20,7 +20,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (## tmux-pane helm-c-yasnippet yasnippet-snippets yasnippet ace-jump-mode groovy-mode jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m lsp-vue lsp-mode highlight-parentheses google-c-style diminish web-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
+    (## tmux-pane helm-c-yasnippet yasnippet-snippets yasnippet ace-jump-mode groovy-mode jenkins dockerfile-mode k8s-mode google-translate auto-complete awesome-tab w3m highlight-parentheses google-c-style diminish web-mode markdown-mode doom-modeline doom-themes evil-magit magit helm org neotree evil)))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -358,6 +358,15 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; Google Translate
 (use-package google-translate
   :config
+  (defun google-translate-json-suggestion (json)
+    "Retrieve from JSON (which returns by the
+    `google-translate-request' function) suggestion. This function
+    does matter when translating misspelled word. So instead of
+    translation it is possible to get suggestion."
+    (let ((info (aref json 7)))
+      (if (and info (> (length info) 0))
+          (aref info 1)
+        nil)))
   (setq-default google-translate-enable-ido-completion t)
   (setq-default google-translate-default-source-language "en")
   (setq-default google-translate-default-target-language "zh-CN")

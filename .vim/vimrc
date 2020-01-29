@@ -74,7 +74,7 @@ hi Search cterm=NONE ctermfg=black ctermbg=gray
 set autowrite
 
 set laststatus=2
-set statusline=%F%m%r%w\ %{fugitive#statusline()}\ [%l,%v]\ [%{&ff}]\ [%{&ft}]
+set statusline=%f%m%r%w\ %{fugitive#statusline()}\ [%l,%v]\ [%{&ff}]\ [%{&ft}]
 
 function! DeleteTrailingWS()
 	execute 'normal! mz'
@@ -394,9 +394,8 @@ nmap <leader>z :call Zoom()<CR>
 " 翻译
 Plug 'VincentCordobes/vim-translate'
 let g:translate#default_languages={'en': 'zh'}
-nnoremap <silent> <leader>tt :<C-u>Translate<CR>
 vnoremap <silent> <leader>tt :<C-u>TranslateVisual<CR>
-nnoremap <silent> <leader>tw viw :TranslateVisual<CR>
+nnoremap <silent> <leader>tt viw :TranslateVisual<CR>
 nnoremap <silent> <leader>tp vip :TranslateVisual<CR>
 nnoremap <silent> <leader>tq :TranslateClear<CR>
 
@@ -524,16 +523,16 @@ Plug '/usr/local/fzf'
 Plug 'junegunn/fzf.vim'
 nnoremap <leader>mm :Marks<CR>
 nnoremap <leader>ww :Windows<CR>
-nnoremap <leader>bb :BuffersToggle<CR>
+nnoremap <leader>bb :BufExplorer<CR>
 nnoremap <leader>ss :Ag<CR>
+nnoremap <M-x> :Commands<CR>
 nnoremap <C-p> :CtrlP<CR>
 
 " buffer
 nnoremap <leader>bp :bprevious<CR>
 nnoremap <leader>bn :bnext<CR>
-
-nnoremap <M-p> :bprevious<CR>
-nnoremap <M-n>bn :bnext<CR>
+" nnoremap <M-p> :bprevious<CR>
+" nnoremap <M-n> :bnext<CR>
 
 " sudo
 map <leader>sudo :w !sudo tee %<CR><CR><CR>L
@@ -547,5 +546,15 @@ let g:instant_markdown_autostart = 0
 " mattn/gist-vim
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
+
+set undofile
+set backupdir=~/.vim/.backup//
+set directory=~/.vim/.swp//
+set undodir=~/.vim/.undo//
+
+set wildmenu
+set wildmode=longest:list,full
+
+Plug 'jlanzarotta/bufexplorer'
 
 call plug#end()

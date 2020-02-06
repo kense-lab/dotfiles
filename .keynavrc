@@ -45,6 +45,7 @@ shift+u move-right,move-up
 shift+b move-left,move-down
 shift+n move-right,move-down
 space warp,click 1,end
+i warp,click 1,end
 o warp,click 3,end
 semicolon warp,end
 1 click 1

@@ -180,6 +180,9 @@ alias xmind='nohup /usr/local/xmind-8-update8-linux/XMind_amd64/XMind > /dev/nul
 # kettle spoon
 alias spoon='nohup /usr/local/data-integration-8.2-bigdata/spoon.sh > /dev/null &'
 
+# man
+alias cman='man -M /usr/share/man/zh_CN'
+
 # docker
 alias docker-rmi-none="docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi"
 
@@ -201,7 +204,8 @@ export PATH=$PATH:/usr/local/go/bin
 # kettle spoon
 alias spoon='nohup /usr/share/data-integration-8.2-bigdata/spoon.sh > /dev/null &'
 
-alias emacsclient='nohup emacsclient -c > /dev/null &'
+alias emacsc='nohup emacsclient -c > /dev/null &'
+alias emacst='emacsclient -t'
 
 # fzf
 

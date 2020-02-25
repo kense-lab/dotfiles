@@ -557,4 +557,14 @@ set wildmode=longest:list,full
 
 Plug 'jlanzarotta/bufexplorer'
 
+Plug 'airblade/vim-rooter'
+
+Plug 'camspiers/lens.vim'
+let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
+let g:lens#disabled=1
+command! Lens :call lens#run()
+nnoremap <C-w>a :Lens<CR>
+command! LensEnable :let lens#disabled=0
+command! LensDisable :let lens#disabled=1
+
 call plug#end()

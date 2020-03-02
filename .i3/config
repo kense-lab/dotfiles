@@ -284,6 +284,7 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id fcitx
 exec --no-startup-id keynav
+exec --no-startup-id flameshot
 # exec --no-startup-id /home/hs/bin/ssctl.py start
 exec --no-startup-id /usr/bin/xmodmap /home/kense/.Xmodmap
 exec --no-startup-id i3-msg 'workspace 1:1 terminal; exec gnome-terminal -e "tmux"'

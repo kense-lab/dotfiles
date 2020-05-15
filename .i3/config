@@ -96,6 +96,7 @@ workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+Shift+Tab move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
 # bindsym $mod+h split h;exec notify-send 'tile horizontally'
@@ -185,7 +186,8 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 # assign [class="Skype"] $ws5
 assign [class="DBeaver"] $ws4
 assign [class="datagrip"] $ws4
-# assign [class="idea"] $ws3
+assign [class="idea"] $ws3
+assign [class="webstorm"] $ws5
 assign [class="Pcmanfm"] $ws6
 assign [class="Chromium"] $ws2
 
@@ -283,10 +285,10 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id fcitx
-exec --no-startup-id keynav
 exec --no-startup-id flameshot
 # exec --no-startup-id /home/hs/bin/ssctl.py start
 exec --no-startup-id /usr/bin/xmodmap /home/kense/.Xmodmap
+exec --no-startup-id keynav
 exec --no-startup-id i3-msg 'workspace 1:1 terminal; exec gnome-terminal -e "tmux"'
 exec --no-startup-id i3-msg 'workspace 2:2 chromium; exec chromium'
 # exec --no-startup-id electronic-wechat
@@ -429,6 +431,7 @@ mode "$mode_gaps_outer" {
 }
 
 exec /home/kense/.screenlayout/company.sh
+# exec /home/kense/.screenlayout/home.sh
 exec /home/kense/.auto-switch-device.sh
 # exec electron-ssr
 exec rslsync --config /home/kense/.rslsync.conf

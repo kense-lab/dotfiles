@@ -211,3 +211,5 @@ export PATH=~/.kubectx:$PATH
 
 source /usr/share/nvm/init-nvm.sh
 
+source ~/.company-aliases.sh
+

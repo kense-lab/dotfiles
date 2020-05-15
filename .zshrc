@@ -9,8 +9,8 @@
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
+# robbyrussell simple custom
 ZSH_THEME="robbyrussell"
-# ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -174,11 +174,6 @@ alias tt="trans :zh -sp -I"
 
 # git
 alias gsc="git svn dcommit --interactive"
-
-alias xmind='nohup /usr/local/xmind-8-update8-linux/XMind_amd64/XMind > /dev/null &'
-
-# kettle spoon
-alias spoon='nohup /usr/local/data-integration-8.2-bigdata/spoon.sh > /dev/null &'
 
 # man
 alias cman='man -M /usr/share/man/zh_CN'

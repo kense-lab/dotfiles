@@ -459,6 +459,7 @@ cnoremap <c-p> <up>
 " set numberwidth=4               " Number width
 
 " set relativenumber
+" highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 " augroup CursorLineOnlyInActiveWindow
 "     autocmd!
 "     autocmd InsertLeave * setlocal relativenumber
@@ -557,7 +558,7 @@ set wildmode=longest:list,full
 
 Plug 'jlanzarotta/bufexplorer'
 
-Plug 'airblade/vim-rooter'
+" Plug 'airblade/vim-rooter'
 
 Plug 'camspiers/lens.vim'
 let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
@@ -566,5 +567,11 @@ command! Lens :call lens#run()
 nnoremap <C-w>a :Lens<CR>
 command! LensEnable :let lens#disabled=0
 command! LensDisable :let lens#disabled=1
+
+Plug 'prashanthellina/follow-markdown-links'
+autocmd FileType markdown nnoremap <script> <CR> :FollowLink<CR>
+autocmd FileType markdown nnoremap <script> <BS> :e#<CR>
+
+command! Jq :% !jq
 
 call plug#end()

@@ -568,9 +568,9 @@ nnoremap <C-w>a :Lens<CR>
 command! LensEnable :let lens#disabled=0
 command! LensDisable :let lens#disabled=1
 
-Plug 'prashanthellina/follow-markdown-links'
-autocmd FileType markdown nnoremap <script> <CR> :FollowLink<CR>
-autocmd FileType markdown nnoremap <script> <BS> :e#<CR>
+" Plug 'prashanthellina/follow-markdown-links'
+" autocmd FileType markdown nnoremap <script> <CR> :FollowLink<CR>
+" autocmd FileType markdown nnoremap <script> <BS> :e#<CR>
 
 command! Jq :% !jq
 

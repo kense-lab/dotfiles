@@ -6,3 +6,13 @@ export BROWSER=/usr/bin/palemoon
 
 # default editor
 export EDITOR=/usr/bin/vim
+
+export LC_CTYPE=zh_CN.UTF-8
+export XMODIFIERS=@im=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+
+export XIM=fcitx
+export XIM_PROGRAM=fcitx
+
+export LANG='zh_CN.utf8'

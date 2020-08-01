@@ -573,5 +573,9 @@ command! LensDisable :let lens#disabled=1
 " autocmd FileType markdown nnoremap <script> <BS> :e#<CR>
 
 command! Jq :% !jq
+command! Fmt :%s/\\n/\r/g | :%s/\\t/\t/g
+command! Fmtn :%s/\\n/\r/g
+command! Fmtt :%s/\\t/\t/g
+
 
 call plug#end()

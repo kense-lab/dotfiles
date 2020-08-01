@@ -16,3 +16,5 @@ export XIM=fcitx
 export XIM_PROGRAM=fcitx
 
 export LANG='zh_CN.utf8'
+
+export PATH=$PATH:$HOME/bin

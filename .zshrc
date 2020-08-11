@@ -157,6 +157,7 @@ ssh() {
 # operation
 alias cls="clear"
 alias copy="clipcopy"
+alias num-sum="awk '{sum += \$1};END {print sum}'"
 
 # proxy
 alias q="http_proxy=http://127.0.0.1:7890"
@@ -181,6 +182,21 @@ alias cman='man -M /usr/share/man/zh_CN'
 # docker
 alias docker-rmi-none="docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi"
 
+# kubectl
+alias kube-memory-sum="kubectl top pod --all-namespaces --sort-by memory | awk 'NR != 1 {print \$4}' | replace Mi '' | num-sum"
+alias kube-deployment-stop-all="kubectl get deployment | awk 'NR != 1 {print \$1}' | xargs kubectl scale deployment --replicas=0"
+alias kube-pod-delete-not-running="kubectl get pods | grep -v Running | awk 'NR != 1 {print \$1}' | xargs kubectl delete pod"
+alias kube-top="kubectl top pod --all-namespaces --sort-by memory"
+
+# kettle spoon
+alias spoon='nohup /usr/share/data-integration-8.2-bigdata/spoon.sh > /dev/null &'
+
+alias emacsc='nohup emacsclient -c > /dev/null &'
+alias emacst='emacsclient -t'
+
+alias xfce-i3 "sudo x11docker --xorg --hostdisplay --user=root --clipboard --sharedir='/home/kense/data/limeng/data/VirtualBox VMs/share' x11docker/xfce"
+alias xfce-tty "sudo x11docker --xorg --desktop --user=root --clipboard --sharedir='/home/kense/data/limeng/data/VirtualBox VMs/share' x11docker/xfce"
+
 # cscope
 export CSCOPE_DB=/home/kense/.cscope/cscope_db
 
@@ -195,12 +211,6 @@ export BROWSER=chromium
 
 # go
 export PATH=$PATH:/usr/local/go/bin
-
-# kettle spoon
-alias spoon='nohup /usr/share/data-integration-8.2-bigdata/spoon.sh > /dev/null &'
-
-alias emacsc='nohup emacsclient -c > /dev/null &'
-alias emacst='emacsclient -t'
 
 # fzf
 

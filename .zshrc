@@ -160,7 +160,8 @@ alias copy="clipcopy"
 alias num-sum="awk '{sum += \$1};END {print sum}'"
 
 # proxy
-alias q="http_proxy=http://127.0.0.1:7890"
+alias q="http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890"
+alias proxy="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891"
 
 # xdg-open
 alias op="xdg-open > /dev/null"

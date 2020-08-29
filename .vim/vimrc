@@ -52,6 +52,8 @@ nnoremap <leader>svi :source $MYVIMRC<CR>
 
 set splitright
 
+set backspace=indent,eol,start
+
 inoremap <left> <nop>
 inoremap <right> <nop>
 inoremap <up> <nop>
@@ -178,8 +180,8 @@ map <Plug>(easymotion-prefix)e <Plug>(easymotion-bd-e)
 map <Plug>(easymotion-prefix)l <Plug>(easymotion-lineforward)
 map <Plug>(easymotion-prefix)h <Plug>(easymotion-linebackward)
 
-Plug 'vim-scripts/fcitx.vim'
-" Plug 'kevinhwang91/vim-ibus-sw'
+" Plug 'vim-scripts/fcitx.vim'
+Plug 'CodeFalling/fcitx-vim-osx'
 set ttimeoutlen=100
 
 Plug 'junegunn/vim-easy-align'
@@ -520,7 +522,7 @@ nnoremap <leader>vs :vs<CR>
 nnoremap <leader>sp :sp<CR>
 
 " fzf
-Plug '/usr/local/fzf'
+Plug '/Users/kense/.fzf'
 Plug 'junegunn/fzf.vim'
 nnoremap <leader>mm :Marks<CR>
 nnoremap <leader>ww :Windows<CR>

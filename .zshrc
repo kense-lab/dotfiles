@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/kense/.oh-my-zsh"
+  export ZSH="/Users/kense/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -114,7 +114,7 @@ source $ZSH/oh-my-zsh.sh
 export DEFAULT_USER="kense"
 
 # autojump
-[[ -s /home/kense/.autojump/etc/profile.d/autojump.sh ]] && source /home/kense/.autojump/etc/profile.d/autojump.sh
+[[ -s /Users/kense/.autojump/etc/profile.d/autojump.sh ]] && source /Users/kense/.autojump/etc/profile.d/autojump.sh
 
 # docker autocomplete
 autoload -U compinit && compinit -u
@@ -164,7 +164,7 @@ alias q="http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890"
 alias proxy="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891"
 
 # xdg-open
-alias op="xdg-open > /dev/null"
+alias op="open"
 
 # translation
 alias z="trans :zh"
@@ -199,13 +199,13 @@ alias xfce-i3 "sudo x11docker --xorg --hostdisplay --user=root --clipboard --sha
 alias xfce-tty "sudo x11docker --xorg --desktop --user=root --clipboard --sharedir='/home/kense/data/limeng/data/VirtualBox VMs/share' x11docker/xfce"
 
 # cscope
-export CSCOPE_DB=/home/kense/.cscope/cscope_db
+export CSCOPE_DB=/Users/kense/.cscope/cscope_db
 
 # helm autocompletions
 # source <(helm completion zsh)
 
 # default editor
-export EDITOR=/usr/bin/vim
+export EDITOR=/usr/local/bin/vim
 
 # gist default browser
 export BROWSER=chromium
@@ -220,7 +220,10 @@ export PATH=~/.kubectx:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 source ~/.company-aliases.sh
 

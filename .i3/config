@@ -432,7 +432,7 @@ mode "$mode_gaps_outer" {
 
 exec /home/kense/.screenlayout/company.sh
 # exec /home/kense/.screenlayout/home.sh
-exec /home/kense/.auto-switch-device.sh
+exec /home/kense/bin/auto-switch-device.sh
 # exec electron-ssr
 exec rslsync --config /home/kense/.rslsync.conf
 exec /usr/bin/emacs --daemon

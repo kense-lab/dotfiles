@@ -2,7 +2,7 @@
 
 # 如果检测到有外接USB键盘鼠标则禁用笔记本键盘触摸板
 
-SLEEP_TIME=5
+SLEEP_TIME=2
 
 # 自带的键盘触摸板名字 这里要用xinput list命令查看你的电脑自带键盘触摸板的名字
 KEYBOARD_IN='AT Translated Set 2 keyboard'
@@ -21,6 +21,7 @@ do
             xinput set-prop "$KEYBOARD_IN" 'Device Enabled' 0
 			# 按键重复率
 			xset r rate 250 30
+			xmodmap ~/.Xmodmap
             # echo Disable keyboard
         fi
     else

@@ -17,6 +17,11 @@ set incsearch
 
 set so=5
 
+inoremap <left> <left>
+inoremap <right> <right>
+inoremap <up> <up>
+inoremap <down> <down>
+
 nnoremap <Leader>su :action ShowUsages<CR>
 
 nnoremap <Leader>fu :action FindUsages<CR>

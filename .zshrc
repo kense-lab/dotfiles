@@ -1,8 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$HOME/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/Users/kense/.oh-my-zsh"
+  export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -87,7 +88,8 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -114,7 +116,7 @@ source $ZSH/oh-my-zsh.sh
 export DEFAULT_USER="kense"
 
 # autojump
-[[ -s /Users/kense/.autojump/etc/profile.d/autojump.sh ]] && source /Users/kense/.autojump/etc/profile.d/autojump.sh
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 
 # docker autocomplete
 autoload -U compinit && compinit -u
@@ -157,6 +159,7 @@ ssh() {
 # operation
 alias cls="clear"
 alias copy="clipcopy"
+alias dsk="cd ~/Desktop"
 alias num-sum="awk '{sum += \$1};END {print sum}'"
 
 # proxy
@@ -199,7 +202,7 @@ alias xfce-i3 "sudo x11docker --xorg --hostdisplay --user=root --clipboard --sha
 alias xfce-tty "sudo x11docker --xorg --desktop --user=root --clipboard --sharedir='/home/kense/data/limeng/data/VirtualBox VMs/share' x11docker/xfce"
 
 # cscope
-export CSCOPE_DB=/Users/kense/.cscope/cscope_db
+export CSCOPE_DB=$HOME/.cscope/cscope_db
 
 # helm autocompletions
 # source <(helm completion zsh)
@@ -231,4 +234,9 @@ export LDFLAGS="-L/usr/local/opt/mysql-client@5.7/lib"
 export CPPFLAGS="-I/usr/local/opt/mysql-client@5.7/include"
 
 source ~/.company-aliases.sh
+
+# android
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 

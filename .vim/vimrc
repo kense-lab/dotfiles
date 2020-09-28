@@ -539,6 +539,7 @@ nnoremap <leader>bn :bnext<CR>
 
 " sudo
 map <leader>sudo :w !sudo tee %<CR><CR><CR>L
+command! Sudo :w !sudo tee %<CR><CR><CR>L
 
 " markdown
 Plug 'godlygeek/tabular'
@@ -579,5 +580,7 @@ command! Fmt :%s/\\n/\r/g | :%s/\\t/\t/g
 command! Fmtn :%s/\\n/\r/g
 command! Fmtt :%s/\\t/\t/g
 
+command! Dt :windo diffthis
+command! Do :windo diffoff
 
 call plug#end()

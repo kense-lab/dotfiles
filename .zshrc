@@ -62,7 +62,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -73,11 +73,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  # web-search
-  # vi-mode
+  web-search
+  vi-mode
   # tmux
-  # history
+  history
   git
+  # git-open
   zsh-syntax-highlighting
   jsontools
   kubectl
@@ -160,6 +161,9 @@ alias cls="clear"
 alias copy="clipcopy"
 alias dsk="cd ~/Desktop"
 alias num-sum="awk '{sum += \$1};END {print sum}'"
+alias cp="cp -i"
+alias mv="mv -i"
+alias rm="trash"
 
 # proxy
 alias q="http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890"

@@ -18,7 +18,6 @@ export PATH="$HOME/bin:$PATH"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
 # robbyrussell simple custom
-ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
@@ -191,6 +190,8 @@ alias kube-memory-sum="kubectl top pod --all-namespaces --sort-by memory | awk '
 alias kube-deployment-stop-all="kubectl get deployment | awk 'NR != 1 {print \$1}' | xargs kubectl scale deployment --replicas=0"
 alias kube-pod-delete-not-running="kubectl get pods | grep -v Running | awk 'NR != 1 {print \$1}' | xargs kubectl delete pod"
 alias kube-top="kubectl top pod --all-namespaces --sort-by memory"
+alias kx="kubectx"
+alias kns="kubens"
 
 # kettle spoon
 alias spoon='nohup /usr/share/data-integration-8.2-bigdata/spoon.sh > /dev/null &'
@@ -224,9 +225,9 @@ export PATH=~/.kubectx:$PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # source /usr/share/nvm/init-nvm.sh
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+#   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+#   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # mysql client
 export PATH="/usr/local/opt/mysql-client@5.7/bin:$PATH"
@@ -239,6 +240,22 @@ source ~/.company-aliases.sh
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/Users/kense/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/Users/kense/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/Users/kense/opt/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/Users/kense/opt/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# <<< conda initialize <<<
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

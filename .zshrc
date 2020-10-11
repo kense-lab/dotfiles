@@ -228,7 +228,6 @@ export PATH=~/.kubectx:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# source /usr/share/nvm/init-nvm.sh
 # export NVM_DIR="$HOME/.nvm"
 #   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 #   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
@@ -239,6 +238,9 @@ export LDFLAGS="-L/usr/local/opt/mysql-client@5.7/lib"
 export CPPFLAGS="-I/usr/local/opt/mysql-client@5.7/include"
 
 source ~/.company-aliases.sh
+
+# java
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home
 
 # android
 export ANDROID_HOME=$HOME/Library/Android/sdk

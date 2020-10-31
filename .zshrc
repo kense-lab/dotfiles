@@ -165,6 +165,9 @@ alias cp="cp -i"
 alias mv="mv -i"
 alias rm="trash"
 
+# view
+alias ip="ifconfig -a | grep 192.168 | awk '{print \$2}'"
+
 # proxy
 alias q="http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890"
 alias proxy="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891"
@@ -188,6 +191,7 @@ alias cman='man -M /usr/share/man/zh_CN'
 
 # docker
 alias docker-rmi-none="docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi"
+alias docker-runc-nginx="docker run -it --rm --network=my-network --name nginx -v $(pwd):/usr/share/nginx/html -p 80:80 192.168.43.122/base/nginx:1.15"
 
 # kubectl
 alias kube-memory-sum="kubectl top pod --all-namespaces --sort-by memory | awk 'NR != 1 {print \$4}' | replace Mi '' | num-sum"
@@ -196,6 +200,7 @@ alias kube-pod-delete-not-running="kubectl get pods | grep -v Running | awk 'NR 
 alias kube-top="kubectl top pod --all-namespaces --sort-by memory"
 alias kx="kubectx"
 alias kns="kubens"
+alias kube-del-pod-force="kubectl delete pod --force --grace-period=0"
 
 # kettle spoon
 alias spoon='nohup /usr/share/data-integration-8.2-bigdata/spoon.sh > /dev/null &'

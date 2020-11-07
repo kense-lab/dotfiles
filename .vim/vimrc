@@ -490,6 +490,8 @@ set foldenable
 set foldmethod=indent
 set foldlevelstart=99
 
+set paste
+
 " 重绘屏幕
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 autocmd FileType vue syntax sync fromstart

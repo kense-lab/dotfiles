@@ -190,8 +190,10 @@ alias gsc="git svn dcommit --interactive"
 alias cman='man -M /usr/share/man/zh_CN'
 
 # docker
+alias deti="docker exec -it"
 alias docker-rmi-none="docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi"
 alias docker-runc-nginx="docker run -it --rm --network=my-network --name nginx -v $(pwd):/usr/share/nginx/html -p 80:80 192.168.43.122/base/nginx:1.15"
+alias docker-sorti="docker images --format '{{.ID}}\t{{.Size}}\t{{.Repository}}:{{.Tag}}' | sort -k 2 -h -r"
 
 # kubectl
 alias kube-memory-sum="kubectl top pod --all-namespaces --sort-by memory | awk 'NR != 1 {print \$4}' | replace Mi '' | num-sum"
@@ -255,14 +257,14 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/Users/kense/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# __conda_setup="$($HOME'/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 # if [ $? -eq 0 ]; then
 #     eval "$__conda_setup"
 # else
-#     if [ -f "/Users/kense/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/Users/kense/opt/anaconda3/etc/profile.d/conda.sh"
+#     if [ -f "$HOME/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "$HOME/opt/anaconda3/etc/profile.d/conda.sh"
 #     else
-#         export PATH="/Users/kense/opt/anaconda3/bin:$PATH"
+#         export PATH="$HOME/opt/anaconda3/bin:$PATH"
 #     fi
 # fi
 # unset __conda_setup

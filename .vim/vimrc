@@ -30,6 +30,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap tn :tabn<cr>
 nnoremap tp :tabp<cr>
+command! Tn :tabnew
 
 nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
@@ -487,6 +488,8 @@ set foldenable
 set foldmethod=indent
 set foldlevelstart=99
 
+set paste
+
 " 重绘屏幕
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 autocmd FileType vue syntax sync fromstart
@@ -520,7 +523,6 @@ nnoremap <leader>vs :vs<CR>
 nnoremap <leader>sp :sp<CR>
 
 " fzf
-Plug '/usr/local/fzf'
 Plug 'junegunn/fzf.vim'
 nnoremap <leader>mm :Marks<CR>
 nnoremap <leader>ww :Windows<CR>
@@ -537,6 +539,7 @@ nnoremap <leader>bn :bnext<CR>
 
 " sudo
 map <leader>sudo :w !sudo tee %<CR><CR><CR>L
+command! Sudo :w !sudo tee %<CR><CR><CR>L
 
 " markdown
 Plug 'godlygeek/tabular'
@@ -573,9 +576,12 @@ command! LensDisable :let lens#disabled=1
 " autocmd FileType markdown nnoremap <script> <BS> :e#<CR>
 
 command! Jq :% !jq
+command! Fmtxml :silent 1,$!xmllint -format -recover - 2>/dev/null
 command! Fmt :%s/\\n/\r/g | :%s/\\t/\t/g
 command! Fmtn :%s/\\n/\r/g
 command! Fmtt :%s/\\t/\t/g
 
+command! Dt :windo diffthis
+command! Do :windo diffoff
 
 call plug#end()

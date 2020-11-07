@@ -1,8 +1,16 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$HOME/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/kense/.oh-my-zsh"
+  export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -10,7 +18,7 @@
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
 # robbyrussell simple custom
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -54,7 +62,7 @@ ZSH_THEME="robbyrussell"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -65,11 +73,12 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  # web-search
-  # vi-mode
+  web-search
+  vi-mode
   # tmux
-  # history
+  history
   git
+  # git-open
   zsh-syntax-highlighting
   jsontools
   kubectl
@@ -87,7 +96,8 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -114,7 +124,7 @@ source $ZSH/oh-my-zsh.sh
 export DEFAULT_USER="kense"
 
 # autojump
-[[ -s /home/kense/.autojump/etc/profile.d/autojump.sh ]] && source /home/kense/.autojump/etc/profile.d/autojump.sh
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 
 # docker autocomplete
 autoload -U compinit && compinit -u
@@ -133,14 +143,6 @@ bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 bindkey '^Z' clear-screen
 
-function zle-line-init zle-keymap-select {
-	VIM_PROMPT="%{$fg_bold[yellow]%} -- % NORMAL --% %{$reset_color%}"
-	RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
-    zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
 export KEYTIMEOUT=1
 
 # ssh default vi mode
@@ -157,7 +159,14 @@ ssh() {
 # operation
 alias cls="clear"
 alias copy="clipcopy"
+alias dsk="cd ~/Desktop"
 alias num-sum="awk '{sum += \$1};END {print sum}'"
+alias cp="cp -i"
+alias mv="mv -i"
+alias rm="trash"
+
+# view
+alias ip="ifconfig -a | grep 192.168 | awk '{print \$2}'"
 
 # proxy
 alias q="http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890"
@@ -181,13 +190,19 @@ alias gsc="git svn dcommit --interactive"
 alias cman='man -M /usr/share/man/zh_CN'
 
 # docker
+alias deti="docker exec -it"
 alias docker-rmi-none="docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi"
+alias docker-runc-nginx="docker run -it --rm --network=my-network --name nginx -v $(pwd):/usr/share/nginx/html -p 80:80 192.168.43.122/base/nginx:1.15"
+alias docker-sorti="docker images --format '{{.ID}}\t{{.Size}}\t{{.Repository}}:{{.Tag}}' | sort -k 2 -h -r"
 
 # kubectl
 alias kube-memory-sum="kubectl top pod --all-namespaces --sort-by memory | awk 'NR != 1 {print \$4}' | replace Mi '' | num-sum"
 alias kube-deployment-stop-all="kubectl get deployment | awk 'NR != 1 {print \$1}' | xargs kubectl scale deployment --replicas=0"
 alias kube-pod-delete-not-running="kubectl get pods | grep -v Running | awk 'NR != 1 {print \$1}' | xargs kubectl delete pod"
 alias kube-top="kubectl top pod --all-namespaces --sort-by memory"
+alias kx="kubectx"
+alias kns="kubens"
+alias kube-del-pod-force="kubectl delete pod --force --grace-period=0"
 
 # kettle spoon
 alias spoon='nohup /usr/share/data-integration-8.2-bigdata/spoon.sh > /dev/null &'
@@ -199,7 +214,7 @@ alias xfce-i3 "sudo x11docker --xorg --hostdisplay --user=root --clipboard --sha
 alias xfce-tty "sudo x11docker --xorg --desktop --user=root --clipboard --sharedir='/home/kense/data/limeng/data/VirtualBox VMs/share' x11docker/xfce"
 
 # cscope
-export CSCOPE_DB=/home/kense/.cscope/cscope_db
+export CSCOPE_DB=$HOME/.cscope/cscope_db
 
 # helm autocompletions
 # source <(helm completion zsh)
@@ -224,3 +239,20 @@ source /usr/share/nvm/init-nvm.sh
 
 source ~/.company-aliases.sh
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$($HOME'/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "$HOME/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "$HOME/opt/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="$HOME/opt/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# <<< conda initialize <<<
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

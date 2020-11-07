@@ -358,7 +358,7 @@ colors:
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /usr/local/bin/zsh
+  program: zsh
   args:
     - -l
     - -c
@@ -368,7 +368,7 @@ shell:
 #
 # Directory the shell is started in. If this is unset, or `None`, the working
 # directory of the parent process will be used.
-working_directory: "/Users/kense/Desktop"
+working_directory: "/home/kense/Desktop"
 
 # WinPTY backend (Windows only)
 #

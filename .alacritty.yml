@@ -358,7 +358,7 @@ colors:
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /usr/local/bin/zsh
+  program: zsh
   args:
     - -l
     - -c

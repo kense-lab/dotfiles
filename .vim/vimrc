@@ -145,6 +145,17 @@ Plug 'tpope/vim-fugitive'
 nnoremap <leader>gs :Gstatus<cr>
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
 
 " Plug 'hotoo/pangu.vim'
 
@@ -490,7 +501,7 @@ set foldenable
 set foldmethod=indent
 set foldlevelstart=99
 
-set paste
+" set paste
 
 " 重绘屏幕
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>

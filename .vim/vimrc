@@ -589,13 +589,16 @@ command! LensDisable :let lens#disabled=1
 " autocmd FileType markdown nnoremap <script> <CR> :FollowLink<CR>
 " autocmd FileType markdown nnoremap <script> <BS> :e#<CR>
 
+command! Fmt :Autoformat
 command! Jq :% !jq
 command! Fmtxml :silent 1,$!xmllint -format -recover - 2>/dev/null
-command! Fmt :%s/\\n/\r/g | :%s/\\t/\t/g
-command! Fmtn :%s/\\n/\r/g
-command! Fmtt :%s/\\t/\t/g
+command! Fmtnt :%s/\\n/\r/g | :%s/\\t/\t/g
 
 command! Dt :windo diffthis
 command! Do :windo diffoff
+
+Plug 'Chiel92/vim-autoformat'
+let g:formatdef_sqlformat = '"sqlformat --keywords upper -"'
+let g:formatters_sql = ['sqlformat']
 
 call plug#end()

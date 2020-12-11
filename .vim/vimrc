@@ -337,14 +337,6 @@ nnoremap  cp :cp<CR>
 nnoremap  <leader>yfn :let @+=expand("%:t")<CR> :let @"=expand("%:t")<CR>
 nnoremap  <leader>yfp :let @+=expand("%:p")<CR> :let @"=expand("%:p")<CR>
 
-" 转义Alt键
-let c='a'
-while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
-
 " switch tab
 " :nn <M-h> gT<CR>
 " :nn <M-l> gt<CR>
@@ -536,7 +528,7 @@ nnoremap <leader>vs :vs<CR>
 nnoremap <leader>sp :sp<CR>
 
 " fzf
-Plug '/Users/kense/.fzf'
+Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 nnoremap <leader>mm :Marks<CR>
 nnoremap <leader>ww :Windows<CR>

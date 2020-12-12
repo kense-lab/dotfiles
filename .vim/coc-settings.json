@@ -1,0 +1,23 @@
+{
+	"codeLens.enable": true,
+	"java.referencesCodeLens.enabled": true,
+	"diagnostic.checkCurrentLine": false,
+	"java.jdt.ls.vmargs": "-javaagent:/Users/kense/.config/coc/extensions/lombok/lombok.jar",
+	"java.format.settings.url": "/Users/kense/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
+	"java.completion.guessMethodArguments": false,
+	"java.codeGeneration.toString.template": "${object.className} [${member.name()}=${member.value}, ${otherMembers}]",
+	"list.nextKeymap": "<C-n>",
+	"list.previousKeymap": "<C-p>",
+	"cursors.nextKey": "<C-j>",
+	"cursors.previousKey": "<C-k>",
+	"languageserver": {
+		"dockerfile": {
+			"command": "docker-langserver",
+			"filetypes": ["dockerfile"],
+			"args": ["--stdio"]
+		}
+	},
+	"yaml.schemas": {
+		"kubernetes": ["/k8s-*", "/deploy/*"]
+	}
+}

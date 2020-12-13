@@ -455,6 +455,14 @@ source ~/.config/nvim/plug-config/coc.vim
 
 Plug 'nvim-treesitter/nvim-treesitter'
 
+" Java
+command! JavaExec :call JavaExec()
+
+function! JavaExec ()
+	execute "!javac %"
+	execute "!java %:r"
+endfunction
+
 call plug#end()
 
 lua << EOF

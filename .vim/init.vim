@@ -50,8 +50,8 @@ set hidden
 
 nnoremap <leader>evi :e $MYVIMRC<CR>
 nnoremap <leader>svi :source $MYVIMRC<CR>
-command! VimConfig :e $MYVIMRC
-command! SourceVimConfig :source $MYVIMRC
+command! Evi :vs $MYVIMRC
+command! Svi :source $MYVIMRC
 
 set splitright
 
@@ -125,15 +125,15 @@ nnoremap <leader>fe :NERDTreeToggle<cr>
 nnoremap <leader>ff :NERDTreeFind<cr>
 
 
-Plug 'kien/ctrlp.vim'
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/target/*,*/node_modules/*
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_root_markers = ['.root']
-let g:ctrlp_prompt_mappings = {
-			\ 'PrtSelectMove("j")': ['<c-n>', '<down>'],
-			\ 'PrtSelectMove("k")': ['<c-p>', '<up>'],
-			\ 'PrtHistory(-1)': ['<c-j>'],
-			\ 'PrtHistory(1)': ['<c-k>']}
+" Plug 'kien/ctrlp.vim'
+" set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/target/*,*/node_modules/*
+" let g:ctrlp_clear_cache_on_exit = 0
+" let g:ctrlp_root_markers = ['.root']
+" let g:ctrlp_prompt_mappings = {
+" 			\ 'PrtSelectMove("j")': ['<c-n>', '<down>'],
+" 			\ 'PrtSelectMove("k")': ['<c-p>', '<up>'],
+" 			\ 'PrtHistory(-1)': ['<c-j>'],
+" 			\ 'PrtHistory(1)': ['<c-k>']}
 
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
@@ -395,7 +395,8 @@ nnoremap <leader>ww :Windows<CR>
 nnoremap <leader>bb :BufExplorer<CR>
 nnoremap <leader>ss :Ag<CR>
 nnoremap <M-x> :Commands<CR>
-nnoremap <C-p> :CtrlP<CR>
+" nnoremap <C-p> :CtrlP<CR>
+nnoremap <C-p> :Files<CR>
 
 " buffer
 nnoremap <leader>bp :bprevious<CR>
@@ -456,7 +457,7 @@ source ~/.config/nvim/plug-config/coc.vim
 Plug 'nvim-treesitter/nvim-treesitter'
 
 " Java
-command! JavaExec :call JavaExec()
+command! Je :call JavaExec()
 
 function! JavaExec ()
 	execute "!javac %"

@@ -133,7 +133,7 @@ autoload -U compinit && compinit -u
 COMPLETION_WAITING_DOTS="true"
 
 # zsh vi mode
-bindkey -v
+# bindkey -v
 
 bindkey '^P' up-history
 bindkey '^N' down-history
@@ -248,6 +248,11 @@ source ~/.company-aliases.sh
 
 # java
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home
+alias vim="JAVA_HOME=/usr/local/Cellar/openjdk/14.0.1 vim"
+alias vi="JAVA_HOME=/usr/local/Cellar/openjdk/14.0.1 vi"
+
+# arthas
+alias arthas="java -jar $HOME/opt/arthas/arthas-boot.jar"
 
 # android
 export ANDROID_HOME=$HOME/Library/Android/sdk

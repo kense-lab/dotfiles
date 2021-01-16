@@ -390,6 +390,7 @@ nnoremap <leader>sP :new<CR>
 " fzf
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
+let g:fzf_layout = { 'down': '~60%' }
 nnoremap <leader>mm :Marks<CR>
 nnoremap <leader>ww :Windows<CR>
 nnoremap <leader>bb :BufExplorer<CR>

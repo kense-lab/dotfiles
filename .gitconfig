@@ -1,6 +1,8 @@
 [user]
 	email = limeng1300881350@gmail.com
 	name = kense
+[pull]
+	rebase = true
 [push]
 	default = matching
 [core]
@@ -34,3 +36,5 @@
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci%x08%x08%x08%x08%x08%x08) %Cblue<%an>%Creset' --date=format:'%F %T' --abbrev-commit --all
 [log]
 	date = local
+[icdiff]
+	options = --highlight --line-numbers

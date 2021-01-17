@@ -314,12 +314,47 @@ nmap <leader>z :call Zoom()<CR>
 
 
 " 翻译
-Plug 'VincentCordobes/vim-translate'
-let g:translate#default_languages={'en': 'zh'}
-vnoremap <silent> <leader>tt :<C-u>TranslateVisual<CR>
-nnoremap <silent> <leader>tt viw :TranslateVisual<CR>
-nnoremap <silent> <leader>tp vip :TranslateVisual<CR>
-nnoremap <silent> <leader>tq :TranslateClear<CR>
+Plug 'skywind3000/asyncrun.vim'
+" Plug 'VincentCordobes/vim-translate'
+" let g:translate#default_languages={'en': 'zh'}
+" vnoremap <silent> <leader>tt :<C-u>TranslateVisual<CR>
+" nnoremap <silent> <leader>tt viw :TranslateVisual<CR>
+" nnoremap <silent> <leader>tp vip :TranslateVisual<CR>
+" nnoremap <silent> <leader>tq :TranslateClear<CR>
+
+" vim-init  所在目录，不带末尾的"/"
+let s:home = fnamemodify(resolve(expand('<sfile>:p')), ':h:h')
+
+" 返回路径 "s:home/path"；末尾是否包含"/"取决于path参数
+function! s:path(path)
+	let l:path = expand(s:home . '/' . a:path )
+	return substitute(l:path, '\\', '/', 'g')
+endfunction
+" echo s:path('.tmux/plugins/tmux-translator/engine/')
+
+" 返回文件路径 "s:home/path/name"，为便于理解，要求path参数带末尾的"/"
+function! s:cfg(path, name)
+    let l:cfgpath = s:path(a:path)
+    let l:cfgfile = l:cfgpath . a:name
+    return l:cfgfile
+    " 转义 cfgfile 以便用作shell命令的参数
+    " return shellescape(cfgfile)
+endfunction
+" echo s:cfg('.tmux/plugins/tmux-translator/engine/', 'file.cfg')
+
+function! TranslatorPyNormal(path, name)
+    let l:translator = s:cfg(a:path, a:name) . " --engine=youdao"
+    exe ":AsyncRun! -strip python3 " . l:translator . " \"<cword>\""
+endfunction
+
+function! TranslatorPyVisual(path, name)
+    let l:translator = s:cfg(a:path, a:name) . " --engine=youdao"
+    let l:selection = @0
+    exe ":AsyncRun! -strip python3 " . l:translator . " \"". l:selection . "\""
+endfunction
+
+nnoremap <leader>tt :call TranslatorPyNormal('.tmux/plugins/tmux-translator/engine/', 'translator.py')<CR>
+vnoremap <leader>tt y:call TranslatorPyVisual('.tmux/plugins/tmux-translator/engine/', 'translator.py')<CR>
 
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
@@ -472,6 +507,7 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
     enable = true,              -- false will disable the whole extension
+	disable = { "python" }
   },
 }
 EOF

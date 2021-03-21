@@ -62,7 +62,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="yyyy-mm-dd"
+HIST_STAMPS="yyyy-mm-dd"
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -210,6 +215,8 @@ alias spoon='nohup /usr/share/data-integration-8.2-bigdata/spoon.sh > /dev/null 
 alias emacsc='nohup emacsclient -c > /dev/null &'
 alias emacst='emacsclient -t'
 
+alias docker-machine-env='eval $(docker-machine env default)'
+
 alias xfce-i3 "sudo x11docker --xorg --hostdisplay --user=root --clipboard --sharedir='/home/kense/data/limeng/data/VirtualBox VMs/share' x11docker/xfce"
 alias xfce-tty "sudo x11docker --xorg --desktop --user=root --clipboard --sharedir='/home/kense/data/limeng/data/VirtualBox VMs/share' x11docker/xfce"
 
@@ -226,7 +233,9 @@ export EDITOR=/usr/local/bin/vim
 export BROWSER=chromium
 
 # go
-export PATH=$PATH:/usr/local/go/bin
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/Learn/code
+export PATH=$PATH:$GOROOT/bin
 
 # fzf
 
@@ -250,6 +259,7 @@ source ~/.company-aliases.sh
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home
 alias vim="JAVA_HOME=/usr/local/Cellar/openjdk/14.0.1 vim"
 alias vi="JAVA_HOME=/usr/local/Cellar/openjdk/14.0.1 vi"
+alias wk="cd ~/vimwiki && vim -c VimwikiIndex"
 
 # arthas
 alias arthas="java -jar $HOME/opt/arthas/arthas-boot.jar"
@@ -258,6 +268,13 @@ alias arthas="java -jar $HOME/opt/arthas/arthas-boot.jar"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# brew
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+
+# perl
+export PERL5LIB=/usr/local/opt/subversion/lib/perl5/site_perl/5.18.4/darwin-thread-multi-2level
 
 
 # >>> conda initialize >>>
@@ -277,3 +294,5 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+eval $(thefuck --alias)

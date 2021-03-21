@@ -68,6 +68,7 @@ set noexpandtab
 augroup two_tab_indent
 	au!
 	autocmd FileType xml,html,json setlocal tabstop=2 | setlocal shiftwidth=2
+    autocmd FileType scss,vue,javascript,yaml,css setlocal expandtab | setlocal tabstop=2 | setlocal shiftwidth=2
 augroup END
 
 set incsearch
@@ -169,11 +170,11 @@ Plug 'tpope/vim-repeat'
 
 Plug 'tpope/vim-abolish'
 
-Plug 'posva/vim-vue'
+" Plug 'posva/vim-vue'
+" Plug 'othree/html5.vim'
 augroup two_spaces_indent
     au!
     autocmd FileType javascript,scss,yaml,css setlocal expandtab | setlocal tabstop=2 | setlocal shiftwidth=2
-
 augroup END
 
 Plug 'mattn/emmet-vim' , { 'for': ['xml', 'html', 'jsp', 'js', 'vue'] }
@@ -229,6 +230,8 @@ Plug 'vimwiki/vimwiki'
 nmap <Leader>wK <Plug>VimwikiIndex
 nmap <Leader>wHH <Plug>Vimwiki2HTMLBrowse
 nmap <Leader>wT <Plug>VimwikiTabIndex
+nmap <leader>td :VimwikiToggleListItem<cr>
+nmap <C-\> :VimwikiVSplitLink<cr>
 let wiki = {}
 let wiki.path = '~/vimwiki/'
 let wiki.auto_toc=1
@@ -243,39 +246,16 @@ let wiki.nested_syntaxes = {
 			\ 'perl': 'perl'}
 let g:vimwiki_list = [wiki]
 let g:vimwiki_html_header_numbering = 1
+let g:vimwiki_folding = 'syntax'
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 au Filetype vimwiki setlocal textwidth=80
-
-nnoremap <leader>td :VimwikiToggleListItem<cr>
 
 " file:xxx::lineNum to unnamed register
 function! VimwikiStoreLink()
 	let @" = 'file:'.expand("%:p").'::'.line('.')
 endfunction
 command! StoreLink :call VimwikiStoreLink()
-
-function! VimwikiLinkHandler(link)
-	try
-		let pageNum = matchstr(a:link, '::\zs\d\+')
-		let file = matchstr(a:link, '^.*:\zs.*\ze::')
-		let fileCmdOutput = system('file '.file)
-		if pageNum ==? ""
-			pageNum = 1
-		endif
-		if matchstr(fileCmdOutput, '\zsPDF\ze') ==? 'PDF'
-			let opener = '/usr/bin/zathura'
-			call system(opener.' -P '.pageNum.' '.file.' &')
-			return 1
-		elseif matchstr(fileCmdOutput, '\zstext\ze') ==? 'text'
-			execute 'edit +'.pageNum.' '.file
-			return 1
-		else
-			return 0
-		endif
-	catch
-		echom "This can happen for a variety of reasons ..."
-	endtry
-	return 0
-endfunction
 
 set sessionoptions+=globals
 Plug 'tpope/vim-obsession'
@@ -441,8 +421,9 @@ nnoremap <leader>bn :bnext<CR>
 " nnoremap <M-n> :bnext<CR>
 
 " sudo
-map <leader>sudo :w !sudo tee % <CR><CR><CR>L
-command! Sudo :w !sudo tee % <CR><CR><CR>L
+" map <leader>sudo :w !sudo tee % <CR><CR><CR>L
+" command! Sudo :w !sudo tee %
+Plug 'tpope/vim-eunuch'
 
 " markdown
 Plug 'godlygeek/tabular'
@@ -490,8 +471,6 @@ let g:formatters_sql = ['sqlformat']
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 source ~/.config/nvim/plug-config/coc.vim
 
-Plug 'nvim-treesitter/nvim-treesitter'
-
 " Java
 command! Je :call JavaExec()
 
@@ -500,14 +479,22 @@ function! JavaExec ()
 	execute "!java %:r"
 endfunction
 
+" debug
+" function! JavaStartDebugCallback(err, port)
+"   execute "cexpr! 'Java debug started on port: " . a:port . "'"
+"   call vimspector#LaunchWithSettings({ "configuration": "Java Attach", "AdapterPort": a:port })
+" endfunction
+
+" function JavaStartDebug()
+"   call CocActionAsync('runCommand', 'vscode.java.startDebugSession', function('JavaStartDebugCallback'))
+" endfunction
+
+" nmap <F2> :call JavaStartDebug()<CR>
+
+" Plug 'puremourning/vimspector'
+
+" nmap <Leader>di <Plug>VimspectorBalloonEval
+" xmap <Leader>di <Plug>VimspectorBalloonEval
+
 call plug#end()
 
-lua << EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-	disable = { "python" }
-  },
-}
-EOF

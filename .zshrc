@@ -155,16 +155,20 @@ ssh() {
 	if [ "$#" -eq 0 ]; then
 		/usr/bin/ssh
 	elif [ "$#" -eq 1 ]; then
-		/usr/bin/ssh "$1" -t bash -o vi
+		/usr/bin/ssh "$1" -t bash --login -o vi
 	else
 		/usr/bin/ssh $@
 	fi
 }
 
+# 去除 macos 系统 tar 包 '._' 开头隐藏文件
+COPYFILE_DISABLE=1
+
 # operation
 alias cls="clear"
 alias copy="clipcopy"
-alias dsk="cd ~/Desktop"
+alias ds="cd ~/Desktop"
+alias dl="cd ~/Downloads"
 alias num-sum="awk '{sum += \$1};END {print sum}'"
 alias cp="cp -i"
 alias mv="mv -i"

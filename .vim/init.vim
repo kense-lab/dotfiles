@@ -186,15 +186,16 @@ let g:multi_cursor_quit_key='<C-c>'
 nnoremap <C-c> :call multiple_cursors#quit()<CR>
 
 Plug 'easymotion/vim-easymotion'
-map <Plug>(easymotion-prefix)w <Plug>(easymotion-bd-w)
-map <Plug>(easymotion-prefix)e <Plug>(easymotion-bd-e)
-map <Plug>(easymotion-prefix)l <Plug>(easymotion-lineforward)
-map <Plug>(easymotion-prefix)h <Plug>(easymotion-linebackward)
+" let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+nmap s <Plug>(easymotion-overwin-f2)
+map <Leader>hh <Plug>(easymotion-linebackward)
+map <Leader>ll <Plug>(easymotion-lineforward)
 
 " fcitx
 " Plug 'vim-scripts/fcitx.vim'
 Plug 'CodeFalling/fcitx-vim-osx'
-set ttimeoutlen=100
+set ttimeoutlen=500
 
 Plug 'junegunn/vim-easy-align'
 vmap ga <Plug>(EasyAlign)
@@ -250,6 +251,8 @@ let g:vimwiki_folding = 'syntax'
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 au Filetype vimwiki setlocal textwidth=80
+let g:vimwiki_markdown_link_ext = 1
+
 
 " file:xxx::lineNum to unnamed register
 function! VimwikiStoreLink()

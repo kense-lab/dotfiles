@@ -1,4 +1,4 @@
-source ~/.vim/vimrc
+source ~/.vim/init.vim
 
 set noundofile
 set nobackup
@@ -17,45 +17,33 @@ set incsearch
 
 set so=5
 
-inoremap <left> <left>
-inoremap <right> <right>
-inoremap <up> <up>
-inoremap <down> <down>
+command! Evi vs ~/.ideavimrc
+command! Svi source ~/.ideavimrc
 
-nnoremap <Leader>su :action ShowUsages<CR>
 
-nnoremap <Leader>fu :action FindUsages<CR>
-
-nnoremap <Leader><space> a<space><ESC>:action CodeCompletion<CR>
-
+" 查找
 nnoremap <C-n> :action GotoClass<CR>
-nnoremap <leader>gc :action GotoClass<CR>
-
-nnoremap <leader>fe :action RecentFiles<CR>
-
 nnoremap <C-p> :action GotoFile<CR>
 
-nnoremap <C-S-o> :action OverrideMethods<CR>
-
-nnoremap <leader>ss :action FileStructurePopup<CR>
-
-nnoremap <C-S-p> :action ParameterInfo<CR>
-
-nnoremap <C-q> :action QuickJavaDoc<CR>
-
-nnoremap <leader>hc :action TypeHierarchy<CR>
-
-nnoremap <leader>hm :action MethodHierarchy<CR>
-
-nnoremap gd :action GotoDeclaration<CR>
-
-nnoremap gi :action GotoImplementation<CR>
-
-nnoremap <leader>fm :action ReformatCode<CR>
-
-nnoremap <Leader>oi :action OptimizeImports<CR>
-
+" 新建文件
 nnoremap <Leader>nc :action NewClass<CR>
 nnoremap <Leader>np :action NewDir<CR>
 nnoremap <Leader>nf :action NewFile<CR>
+
+" 格式化
+nnoremap <leader>fm :action ReformatCode<CR>
+nnoremap <Leader>oi :action OptimizeImports<CR>
+
+" 跳转
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gr :action ShowUsages<CR>
+nnoremap gR :action FindUsages<CR>
+
+" 补全
+nnoremap <Leader><space> a<space><ESC>:action CodeCompletion<CR>
+
+" 类结构
+nnoremap <C-S-o> :action FileStructurePopup<CR>
+nnoremap <leader>hc :action TypeHierarchy<CR>
 

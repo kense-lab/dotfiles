@@ -1,4 +1,8 @@
-# <类型>[可选的作用域]: <描述>  [可选的正文] [可选的脚注]
+# <type>[optional scope]: <description>
+
+# [optional body]
+
+# [optional footer]
 
 # --- 提交 结束 ---
 # 类型值包含
@@ -8,10 +12,17 @@
 
 #    docs (文档改动)
 #    style (格式化, 缺失分号等; 不包括生产代码变动)
-#    build (构造工具的或者外部依赖的改动, 例如 webpack, npm)
 #    refactor (重构代码)
 #    revert (执行 git revert 打印的 message)
 
 #    perf (提高性能的改动)
-#    ci (与 CI 有关的改动)
+#    test (添加缺失的测试, 重构测试, 不包括生产代码变动)
 #    chore (不修改 src 或者 test 的其余修改, 例如构建过程或辅助工具的变动)
+
+# 其余字段说明
+
+# scope: 一个可选的修改范围, 用于标识此次提交主要涉及到代码中哪个模块
+# description: 简明扼要描述本次提交的内容, 首字母无需大写, 结尾不需要使用 .
+# optional body: 详细描述本次提交, 比如此次变更的动机, 如需换行, 则使用 |
+# optional footer: 描述与之关联的 issue 或 break change
+
